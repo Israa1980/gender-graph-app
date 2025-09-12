@@ -1,0 +1,5 @@
+streamlit
+tensorflow
+matplotlib
+scikit-learn
+pyngrok
