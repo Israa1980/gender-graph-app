@@ -20,7 +20,7 @@ model = tf.keras.models.load_model("final_model.keras")
 
 # Download and unzip test data if not already present
 if not os.path.exists("test2"):
-    test_zip_id = "d/1_qVwxGcTcPuctP5e3Jjp4MCM-QELl42E"  
+    test_zip_id = "1_qVwxGcTcPuctP5e3Jjp4MCM-QELl42E"  
     gdown.download(f"https://drive.google.com/uc?id={test_zip_id}", "test2.zip", quiet=False)
 
     with zipfile.ZipFile("test2.zip", "r") as zip_ref:
