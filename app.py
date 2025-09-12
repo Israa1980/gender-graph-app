@@ -2,9 +2,17 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import gdown
+import os
 
-# Load trained model
-model = tf.keras.models.load_model('/content/drive/MyDrive/final_model_revised/final_model.keras')
+# Download model 
+if not os.path.exists("final_model.keras"):
+    file_id = "1zHFqYOlDLvnuoEuR8hcyv5ViFm0HwlU8"  
+    gdown.download(f"https://drive.google.com/uc?id={file_id}", "final_model.keras", quiet=False)
+
+# Load the model
+import tensorflow as tf
+model = tf.keras.models.load_model("final_model.keras")
 
 # Constants
 IMG_SIZE = 150
