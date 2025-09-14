@@ -19,13 +19,13 @@ model = tf.keras.models.load_model("final_model.keras")
 
 # Download and unzip test data if not already present
 if not os.path.exists("test2"):
-    test_zip_id = "1_qVwxGcTcPuctP5e3Jjp4MCM-QELl42E"
+    test_zip_id = "1tupdDkzlp1JIJKEX0cw_XIAboAjcIdXU"
     gdown.download(f"https://drive.google.com/uc?id={test_zip_id}", "test2.zip", quiet=False)
     with zipfile.ZipFile("test2.zip", "r") as zip_ref:
-        zip_ref.extractall()
+        zip_ref.extractall("test2")
 
 # Load test data
-test_dir = "test2/test2"
+test_dir = "test2"
 test_gen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 test_data = test_gen.flow_from_directory(
     directory=test_dir,
