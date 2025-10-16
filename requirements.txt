@@ -1,6 +1,8 @@
 streamlit
 tensorflow
+numpy
 matplotlib
 scikit-learn
-pyngrok
+seaborn
 gdown
+pillow
