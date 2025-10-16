@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # Constants
 IMG_SIZE = 150
 BATCH_SIZE = 16
-CLASS_NAMES = ['inclusive for male', 'inclusive for both genders', 'not inclusive for both genders']
+CLASS_NAMES = ['inclusive for both genders', 'inclusive for male', 'not inclusive for both genders']
 
 # Mode selector
 mode = st.selectbox("Choose mode:", ["Model Prediction (upload images)", "Model Evaluation (test folder)"])
