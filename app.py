@@ -125,7 +125,7 @@ elif mode == "Model Evaluation (test folder)":
         st.text(f"Separate Test Set Accuracy: {acc_sep:.4f}")
 
         # Confusion Matrices
-        fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+        fig, axes = plt.subplots(1, 2, figsize=(14, 6))
         cm_split = confusion_matrix(y_true_split, y_pred_split)
         sns.heatmap(cm_split, annot=True, fmt="d", cmap="Blues",
                     xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[0])
@@ -139,7 +139,7 @@ elif mode == "Model Evaluation (test folder)":
         axes[1].set_title("Separate Test Set")
         axes[1].set_xlabel("Predicted")
         axes[1].set_ylabel("True")
-
+        plt.tight_layout()
         st.pyplot(fig)
 
         # Classification Reports
