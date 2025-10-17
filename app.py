@@ -35,13 +35,19 @@ strategy_images = {
 # Ensure local folder exists
 os.makedirs("color_strategies", exist_ok=True)
 
-# Download and display each image
+# Ensure local folder exists
+os.makedirs("color_strategies", exist_ok=True)
+
+# Display images in a grid (3 per row)
+cols = st.columns(3)  # adjust number of columns
+i = 0
 for title, file_id in strategy_images.items():
     local_path = f"color_strategies/{title.replace(' ', '_')}.jpg"
     if not os.path.exists(local_path):
         gdown.download(f"https://drive.google.com/uc?id={file_id}", local_path, quiet=False)
-    st.image(local_path, caption=title, use_column_width=True)
-
+    with cols[i % 3]:
+        st.image(local_path, caption=title, width=220)  # smaller width inside column
+    i += 1
 
 # --- Download model if not already present ---
 if not os.path.exists('small_cnn_1_1.keras'):
