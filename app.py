@@ -44,6 +44,15 @@ for title, file_id in strategy_images.items():
     with cols[i % 3]:
         st.image(local_path, caption=title, width=220)  # smaller width inside column
     i += 1
+# --- Confidence Score Explanation ---
+st.markdown(
+    """
+    **About the Confidence Score:**  
+    The confidence score represents the probability (between 0 and 1) that the model assigns to its predicted class.  
+    A higher score means the model is more certain about its prediction.  
+    For example, a confidence of **0.92** means the model is 92% sure of its chosen class.
+    """
+)
 
 
 # Mode selector
