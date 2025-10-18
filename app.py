@@ -25,7 +25,7 @@ strategy_images = {
     "Complementary (base colour is dominant)": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
     "Complementary (complementary colour is dominant)": "1dGtQSmx2f1jfMQZnDeejRX8aDiWVNCcn",
     "Monochromatic (2 lighter shades)": "1HRP_LbFDB7M8F2EtLpV5zCt17IF9gxcr",
-    "Monochromatic (1 lighter shade, base colour is dominant)": "1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
+    "Monochromatic (1 lighter shade, base colour is dominant)":"1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
     "Monochromatic (1 lighter shade, lighter shade is dominant)":"1YDPePQz34N-fyCqdxeBzMNiuGJr2neFC",
     "No colour harmony strategies": "11evyJZ6gDzheZFyQoxGX90ImWT6FYHcU"
 
@@ -44,6 +44,8 @@ for title, file_id in strategy_images.items():
     with cols[i % 3]:
         st.image(local_path, caption=title, width=220)  # smaller width inside column
     i += 1
+
+
 # --- Confidence Score Explanation ---
 st.markdown(
     """
@@ -53,6 +55,7 @@ st.markdown(
     For example, a confidence of **0.92** means the model is 92% sure of its chosen class.
     """
 )
+
 
 
 # Mode selector
@@ -88,6 +91,37 @@ if mode == "Model Prediction (upload images)":
                                       type=["jpg", "jpeg", "png"],
                                       accept_multiple_files=True)
 
+    CLASS_DESCRIPTIONS = {
+        "inclusive for male": (
+            "- The uploaded image is considered inclusive for males because your data visualisation employs one of the following colour harmony techniques:\n"
+            "- Complementary colour strategy (two complementary colours, base colour is dominant)\n"
+            "- Complementary colour strategy (two complementary colours, complementary colour is dominant)\n"
+            "- Monochromatic colour strategy (one lighter shade of the base colour beside the base colour, base colour is dominant)\n"
+            "- Analogous colour strategy (two analogous colours, analogous colour is dominant)"
+            "To make it inclusive for both gender follow one of the following colour harmony strategies:\n"
+            "- Split complementary colour harmony strategies (three complementary colours)\n"
+            "- Analogous strategy (using three analogous colours)\n"
+            "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
+
+        ),
+        "inclusive for both genders":(
+            "- The uploaded image is considered inclusive for both genders because your data visualisation employs one of the following colour harmony techniques:\n"            
+            "- Split complementary colour harmony strategies (three complementary colours)\n"
+            "- Analogous strategy (using three analogous colours)\n"
+            "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
+        ),
+        "not inclusive for both genders": (
+            "- The uploaded image is considered not inclusive for both genders because your data visualisation employs one of the following colour harmony techniques:\n"
+            "- No colour strategy applied (bars all with one colour)\n"
+            "- Monochromatic strategy (using two lighter shades of the base colour beside the base colour)\n"
+            "- Monochromatic strategy (using one lighter shade of the base colour beside the base colour, lighter shade is dominant)"
+            "To make it inclusive for both gender follow one of the following colour harmony strategies:\n"
+            "- Split complementary colour harmony strategies (three complementary colours)\n"
+            "- Analogous strategy (using three analogous colours)\n"
+            "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
+
+        )
+    }
     CLASS_DESCRIPTIONS = {
         "inclusive for male": (
             "Inclusive for male includes:\n"
@@ -195,5 +229,15 @@ elif mode == "Model Evaluation (test folder)":
         st.text("Separate Test Set Report:\n" + report_sep)
 
         
+
+       
+
+
+
+
+
+     
+       
+       
 
        
