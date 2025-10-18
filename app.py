@@ -5,11 +5,46 @@ import numpy as np
 from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
+# Page Title
+st.title("Data Visualization Gender Inclusivity Assessment Tool")
 
 # Constants
 IMG_SIZE = 150
 BATCH_SIZE = 16
 CLASS_NAMES = ['inclusive for both genders', 'inclusive for male', 'not inclusive for both genders']
+# --- Download and display Color Harmony Strategy Images ---
+st.subheader("Color Harmony Strategies")
+
+# Dictionary of strategy names and Google Drive file IDs
+# Replace the file IDs below with your actual IDs from Google Drive
+strategy_images = {
+    "Split Complementary (3 colours)": "1szBjfSzXe9evKK9i0NfoFvvhsgoX21zZ",
+    "Analogous (3 colours)": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",
+    "Analogous (2 colours, base colour is dominant)": "1v40ReTUNP7VcGqsKRRJJyQ4Mj7U9l0rT",
+    "Analogous (2 colours, Analogous colour is dominant)": "1A9876j8pMySQeOhkgT6tJueOGMuXLHGD",
+    "Complementary (base colour is dominant)": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
+    "Complementary (complementary colour is dominant)": "1dGtQSmx2f1jfMQZnDeejRX8aDiWVNCcn",
+    "Monochromatic (2 lighter shades)": "1HRP_LbFDB7M8F2EtLpV5zCt17IF9gxcr",
+    "Monochromatic (1 lighter shade, base colour is dominant)": "1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
+    "Monochromatic (1 lighter shade, lighter shade colour is dominant)": "1YDPePQz34N-fyCqdxeBzMNiuGJr2neFC",
+    "No colour harmony strategies": "11evyJZ6gDzheZFyQoxGX90ImWT6FYHcU"
+
+}
+
+# Ensure local folder exists
+os.makedirs("color_strategies", exist_ok=True)
+
+# Display images in a grid (3 per row)
+cols = st.columns(3)  # adjust number of columns
+i = 0
+for title, file_id in strategy_images.items():
+    local_path = f"color_strategies/{title.replace(' ', '_')}.jpg"
+    if not os.path.exists(local_path):
+        gdown.download(f"https://drive.google.com/uc?id={file_id}", local_path, quiet=False)
+    with cols[i % 3]:
+        st.image(local_path, caption=title, width=220)  # smaller width inside column
+    i += 1
+
 
 # Mode selector
 mode = st.selectbox("Choose mode:", ["Model Prediction (upload images)", "Model Evaluation (test folder)"])
