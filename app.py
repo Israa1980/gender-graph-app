@@ -122,28 +122,7 @@ if mode == "Model Prediction (upload images)":
 
         )
     }
-    CLASS_DESCRIPTIONS = {
-        "inclusive for male": (
-            "Inclusive for male includes:\n"
-            "- Complementary colour strategy (two complementary colours, base colour is dominant)\n"
-            "- Complementary colour strategy (two complementary colours, complementary colour is dominant)\n"
-            "- Monochromatic colour strategy (one lighter shade of the base colour beside the base colour, base colour is dominant)\n"
-            "- Analogous colour strategy (two analogous colours, analogous colour is dominant)"
-        ),
-        "inclusive for both genders": (
-            "Inclusive for both genders includes:\n"
-            "- Split complementary colour harmony strategies (three complementary colours)\n"
-            "- Analogous strategy (using three analogous colours)\n"
-            "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
-        ),
-        "not inclusive for both genders": (
-            "Not inclusive for both genders includes:\n"
-            "- No colour strategy applied (bars all with one colour)\n"
-            "- Monochromatic strategy (using two lighter shades of the base colour beside the base colour)\n"
-            "- Monochromatic strategy (using one lighter shade of the base colour beside the base colour, lighter shade is dominant)"
-        )
-    }
-
+    
     if st.button("Run Predictions"):
         if uploaded_files:
             for file in uploaded_files:
