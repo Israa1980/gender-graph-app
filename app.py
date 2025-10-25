@@ -46,18 +46,6 @@ for title, file_id in strategy_images.items():
     i += 1
 
 
-# --- Confidence Score Explanation ---
-st.markdown(
-    """
-    **About the Confidence Score:**  
-    The confidence score represents the probability (between 0 and 1) that the model assigns to its predicted class.  
-    A higher score means the model is more certain about its prediction.  
-    For example, a confidence of **0.92** means the model is 92% sure of its chosen class.
-    """
-)
-
-
-
 # Mode selector
 mode = st.selectbox("Choose mode:", ["Model Prediction (upload images)", "Model Evaluation (test folder)"])
 
@@ -138,9 +126,23 @@ if mode == "Model Prediction (upload images)":
                 class_name = CLASS_NAMES[pred_class]
                 description = CLASS_DESCRIPTIONS.get(class_name, "No description available.")
 
+              
                 st.text(f"File: {file.name}")
                 st.text(f"Prediction: {class_name}")
-                st.text(f"Confidence: {confidence:.2f}")
+                st.markdown(
+                    
+                    f"""
+                    **Confidence Score:** {confidence:.2f}  
+                    The confidence score shows how *certain* the AI model is about the choice it has made – for example, which visualisation it believes is the most inclusive.  
+                    This score ranges from 0 to 1, with numbers closer to 1 meaning the model is more confident in its decision.  
+                    For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected is the most inclusive option based on the data it analysed.
+                    """
+                )           
+     
+
+
+                
+
                 st.markdown(f"**Description:** {description}")
                 st.markdown("---")
         else:
