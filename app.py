@@ -92,17 +92,17 @@ if mode == "Model Prediction (upload images)":
                                       accept_multiple_files=True)
 
     CLASS_DESCRIPTIONS = {
-        "inclusive for male": (
+        
            "inclusive for male": (
-    "👨 Your visualisation is considered **inclusive for males** because it uses one or more of the following colour harmony techniques:\n"
-    "- 🎨 Complementary colour strategy (base colour dominant)\n"
-    "- 🎨 Complementary colour strategy (complementary colour dominant)\n"
-    "- 🎨 Monochromatic strategy (base colour dominant)\n"
-    "- 🎨 Analogous strategy (analogous colour dominant)\n\n"
-    "👉 To make it inclusive for *both genders*, try strategies like split complementary or three-colour analogous schemes. 🌈\n"
-            "- Split complementary colour harmony strategies (three complementary colours)\n"
-            "- Analogous strategy (using three analogous colours)\n"
-            "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
+               "👨 Your visualisation is considered **inclusive for males** because it uses one or more of the following colour harmony techniques:\n"
+               "- 🎨 Complementary colour strategy (base colour dominant)\n"
+               "- 🎨 Complementary colour strategy (complementary colour dominant)\n"
+               "- 🎨 Monochromatic strategy (base colour dominant)\n"
+               "- 🎨 Analogous strategy (analogous colour dominant)\n\n"
+               "👉 To make it inclusive for *both genders*, try strategies like split complementary or three-colour analogous schemes. 🌈\n"
+               "- Split complementary colour harmony strategies (three complementary colours)\n"
+               "- Analogous strategy (using three analogous colours)\n"
+               "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
 
         ),
         "inclusive for both genders":(
