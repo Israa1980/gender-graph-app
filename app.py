@@ -25,8 +25,8 @@ strategy_images = {
     "Complementary (base colour is dominant)": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
     "Complementary (complementary colour is dominant)": "1dGtQSmx2f1jfMQZnDeejRX8aDiWVNCcn",
     "Monochromatic (2 lighter shades)": "1HRP_LbFDB7M8F2EtLpV5zCt17IF9gxcr",
-    "Monochromatic (1 lighter shade, base colour is dominant)":"1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
-    "Monochromatic (1 lighter shade, lighter shade is dominant)":"1YDPePQz34N-fyCqdxeBzMNiuGJr2neFC",
+    "Monochromatic (1 lighter shade, base colour is dominant)": "1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
+    "Monochromatic (1 lighter shade, lighter shade is dominant)": "1YDPePQz34N-fyCqdxeBzMNiuGJr2neFC",
     "No colour harmony strategies": "11evyJZ6gDzheZFyQoxGX90ImWT6FYHcU"
 
 }
@@ -93,12 +93,13 @@ if mode == "Model Prediction (upload images)":
 
     CLASS_DESCRIPTIONS = {
         "inclusive for male": (
-            "- The uploaded image is considered inclusive for males because your data visualisation employs one of the following colour harmony techniques:\n"
-            "- Complementary colour strategy (two complementary colours, base colour is dominant)\n"
-            "- Complementary colour strategy (two complementary colours, complementary colour is dominant)\n"
-            "- Monochromatic colour strategy (one lighter shade of the base colour beside the base colour, base colour is dominant)\n"
-            "- Analogous colour strategy (two analogous colours, analogous colour is dominant)\n"
-            "- To make it inclusive for both gender follow one of the following colour harmony strategies:\n"
+           "inclusive for male": (
+    "👨 Your visualisation is considered **inclusive for males** because it uses one or more of the following colour harmony techniques:\n"
+    "- 🎨 Complementary colour strategy (base colour dominant)\n"
+    "- 🎨 Complementary colour strategy (complementary colour dominant)\n"
+    "- 🎨 Monochromatic strategy (base colour dominant)\n"
+    "- 🎨 Analogous strategy (analogous colour dominant)\n\n"
+    "👉 To make it inclusive for *both genders*, try strategies like split complementary or three-colour analogous schemes. 🌈\n"
             "- Split complementary colour harmony strategies (three complementary colours)\n"
             "- Analogous strategy (using three analogous colours)\n"
             "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
