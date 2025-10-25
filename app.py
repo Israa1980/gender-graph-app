@@ -98,28 +98,28 @@ if mode == "Model Prediction (upload images)":
                "- 🎨 Complementary colour strategy (base colour dominant)\n"
                "- 🎨 Complementary colour strategy (complementary colour dominant)\n"
                "- 🎨 Monochromatic strategy (base colour dominant)\n"
-               "- 🎨 Analogous strategy (analogous colour dominant)\n\n"
-               "👉 To make it inclusive for *both genders*, try strategies like split complementary or three-colour analogous schemes. 🌈\n"
+               "- 🎨 Analogous strategy (analogous colour dominant)\n"
+               "👉 To make it inclusive for *both genders* 🌈, try strategies like split complementary or three-colour analogous schemes\n"
                "- Split complementary colour harmony strategies (three complementary colours)\n"
                "- Analogous strategy (using three analogous colours)\n"
                "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
 
         ),
-        "inclusive for both genders":(
-            "- The uploaded image is considered inclusive for both genders because your data visualisation employs one of the following colour harmony techniques:\n"            
-            "- Split complementary colour harmony strategies (three complementary colours)\n"
-            "- Analogous strategy (using three analogous colours)\n"
-            "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
+       "inclusive for both genders": (
+        "🎉 Well done! Your data visualisation is considered **inclusive for both genders** because it uses one or more of the following colour harmony techniques:\n"
+        "- Split complementary (three colours)\n"
+        "- Analogous (three colours)\n"
+        "- Analogous (two colours, base colour dominant)"
         ),
         "not inclusive for both genders": (
-            "- The uploaded image is considered not inclusive for both genders because your data visualisation employs one of the following colour harmony techniques:\n"
-            "- No colour strategy applied (bars all with one colour)\n"
-            "- Monochromatic strategy (using two lighter shades of the base colour beside the base colour)\n"
-            "- Monochromatic strategy (using one lighter shade of the base colour beside the base colour, lighter shade is dominant)\n"
-            "- To make it inclusive for both gender follow one of the following colour harmony strategies:\n"
-            "- Split complementary colour harmony strategies (three complementary colours)\n"
-            "- Analogous strategy (using three analogous colours)\n"
-            "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
+        "⚠️ Your visualisation is considered **not inclusive for both genders** because it uses one of the following approaches:\n"
+        "- No colour strategy (all bars one colour)\n"
+        "- Monochromatic (two lighter shades)\n"
+        "- Monochromatic (lighter shade dominant)\n"
+        "👉 To improve inclusivity 🌈, try split complementary or three-colour analogous strategies\n"
+            "- 🎨 Split complementary colour harmony strategies (three complementary colours)\n"
+            "- 🎨 Analogous strategy (using three analogous colours)\n"
+            "- 🎨 Analogous strategy (using two analogous colours, base colour is the dominant colour)"
 
         )
     }
