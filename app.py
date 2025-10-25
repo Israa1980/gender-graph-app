@@ -123,7 +123,7 @@ if mode == "Model Prediction (upload images)":
         )
     }
     
-    if st.button("Run Predictions"):
+    if st.button("See Verdict"):
         if uploaded_files:
             for file in uploaded_files:
                 image = tf.keras.utils.load_img(file, target_size=(IMG_SIZE, IMG_SIZE))
