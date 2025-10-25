@@ -14,6 +14,15 @@ BATCH_SIZE = 16
 CLASS_NAMES = ['inclusive for both genders', 'inclusive for male', 'not inclusive for both genders']
 # --- Download and display Colour Harmony Strategy Images ---
 st.subheader("Color Harmony Strategies")
+st.markdown(
+    """
+    Colour harmony strategies are design approaches that combine colours in ways that feel balanced, 
+    visually appealing, and accessible. In the context of inclusivity, these strategies help ensure 
+    that data visualisations are welcoming and easy to interpret for a wider audience.  
+    By applying harmonious colour schemes, we reduce bias, improve readability, and make charts 
+    more engaging for everyone, regardless of gender or background.
+    """
+)
 
 # Dictionary of strategy names and Google Drive file IDs
 # Replace the file IDs below with your actual IDs from Google Drive
