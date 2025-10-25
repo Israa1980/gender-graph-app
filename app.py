@@ -6,13 +6,13 @@ from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
 # Page Title
-st.title("Data Visualization Gender Inclusivity Assessment Tool")
+st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
 
 # Constants
 IMG_SIZE = 150
 BATCH_SIZE = 16
 CLASS_NAMES = ['inclusive for both genders', 'inclusive for male', 'not inclusive for both genders']
-# --- Download and display Color Harmony Strategy Images ---
+# --- Download and display Colour Harmony Strategy Images ---
 st.subheader("Color Harmony Strategies")
 
 # Dictionary of strategy names and Google Drive file IDs
