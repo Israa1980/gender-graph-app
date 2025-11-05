@@ -190,22 +190,22 @@ elif mode == "Model Evaluation (test folder)":
 
         # Display Results
         st.subheader("Evaluation Results")
-        st.text(f"Split Test Set Accuracy:    {acc_split:.4f}")
-        st.text(f"Separate Test Set Accuracy: {acc_sep:.4f}")
+        st.text(f" Test Set Accuracy:    {acc_split:.4f}")
+        st.text(f"similar data Set Accuracy: {acc_sep:.4f}")
 
         # Confusion Matrices
         fig, axes = plt.subplots(1, 2, figsize=(14, 6))
         cm_split = confusion_matrix(y_true_split, y_pred_split)
         sns.heatmap(cm_split, annot=True, fmt="d", cmap="Blues",
                     xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[0])
-        axes[0].set_title("Split Test Set")
+        axes[0].set_title("Test Set")
         axes[0].set_xlabel("Predicted")
         axes[0].set_ylabel("True")
 
         cm_sep = confusion_matrix(y_true_sep, y_pred_sep)
         sns.heatmap(cm_sep, annot=True, fmt="d", cmap="Greens",
                     xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[1])
-        axes[1].set_title("Separate Test Set")
+        axes[1].set_title("similar data Set")
         axes[1].set_xlabel("Predicted")
         axes[1].set_ylabel("True")
         plt.tight_layout()
@@ -216,8 +216,8 @@ elif mode == "Model Evaluation (test folder)":
         report_split = classification_report(y_true_split, y_pred_split, target_names=CLASS_NAMES)
         report_sep = classification_report(y_true_sep, y_pred_sep, target_names=CLASS_NAMES)
 
-        st.text("Split Test Set Report:\n" + report_split)
-        st.text("Separate Test Set Report:\n" + report_sep)
+        st.text("Test Set Report:\n" + report_split)
+        st.text("Similar data Set Report:\n" + report_sep)
 
         
 
