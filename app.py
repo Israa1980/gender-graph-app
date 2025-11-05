@@ -141,8 +141,8 @@ if mode == "Model Prediction (upload images)":
                 st.markdown(
                     f"""
                     **Confidence Score:** {confidence:.2f}  
-                    The confidence score shows how *certain* the AI model is about the choice it has made – for example, which visualisation it believes is the most inclusive.  
-                    This score ranges from 0 to 1, with numbers closer to 1 meaning the model is more confident in its decision.  
+                    The confidence score indicates how certain the AI model is about the choice it has made. 
+                    This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
                     For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
                     """
                 )
