@@ -23,6 +23,42 @@ st.markdown(
     more engaging for everyone, regardless of gender or background.
     """
 )
+st.markdown(
+    """
+    **Split Complementary Colour Strategy**  
+    A variation of complementary colours. You start with one base colour, then instead of using its direct opposite, 
+    you use the two colours adjacent to that complementary colour without choosing the complementary colour itself.  
+
+    **Complementary (Base Colour is Dominant)**  
+    Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
+    The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents.  
+
+    **Complementary (Complementary Colour is Dominant)**  
+    Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
+    The complementary colour serves as the main focus, covering most of the design, while the base colour is used in small amounts for accents.  
+
+    **Analogous Colour Strategy (Three Colours)**  
+    Uses three colours sitting side by side on the colour wheel. This creates a harmonious, natural appearance with smooth transitions.  
+
+    **Analogous (2 Colours, Base Colour is Dominant)**  
+    Uses two neighbouring colours on the wheel, with the base colour as the main focus and the adjacent colour serving as a secondary accent.  
+
+    **Analogous (2 Colours, Analogous Colour is Dominant)**  
+    Uses two neighbouring colours on the wheel, with the adjacent colour as the main focus and the base colour acting as a secondary accent.  
+
+    **Monochromatic (2 Lighter Shades)**  
+    A colour scheme that uses a single hue along with two lighter tints of that same colour.  
+
+    **Monochromatic (1 Lighter Shade, Base Colour is Dominant)**  
+    A single hue complemented by a lighter tint, with the primary colour as the focal point and the lighter shade used sparingly.  
+
+    **Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)**  
+    A single hue complemented by a lighter tint, with the lighter shade as the focal point and the primary colour used sparingly.  
+
+    **No Colour Harmony Strategies**  
+    Use only a single colour without employing any colour harmony techniques.  
+    """
+)
 
 # Dictionary of strategy names and Google Drive file IDs
 # Replace the file IDs below with your actual IDs from Google Drive
