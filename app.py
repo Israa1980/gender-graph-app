@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
-
 # Page Title
 st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
 
@@ -24,69 +23,22 @@ Uses three colours sitting side by side on the colour wheel. This creates a harm
         "file_id": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",
         "caption": "Figure 2 Analogous Colour Strategy (Three Colours)"
     },
-    "Analogous (2 colours, base colour is dominant)": {
-        "definition": """**Analogous (2 Colours, Base Colour is Dominant)**  
-Uses two neighbouring colours on the wheel, with the base colour as the main focus and the adjacent colour serving as a secondary accent.""",
-        "file_id": "1v40ReTUNP7VcGqsKRRJJyQ4Mj7U9l0rT",
-        "caption": "Figure 3 Analogous (2 Colours, Base Colour is Dominant)"
-    },
-    "Analogous (2 colours, Analogous colour is dominant)": {
-        "definition": """**Analogous (2 Colours, Analogous Colour is Dominant)**  
-Uses two neighbouring colours on the wheel, with the adjacent colour as the main focus and the base colour acting as a secondary accent.""",
-        "file_id": "1A9876j8pMySQeOhkgT6tJueOGMuXLHGD",
-        "caption": "Figure 4 Analogous (2 Colours, Analogous Colour is Dominant)"
-    },
-    "Complementary (base colour is dominant)": {
-        "definition": """**Complementary (Base Colour is Dominant)**  
-Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
-The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents.""",
-        "file_id": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
-        "caption": "Figure 5 Complementary (Base Colour is Dominant)"
-    },
-    "Complementary (complementary colour is dominant)": {
-        "definition": """**Complementary (Complementary Colour is Dominant)**  
-Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
-The complementary colour serves as the main focus, covering most of the design, while the base colour is used in small amounts for accents.""",
-        "file_id": "1dGtQSmx2f1jfMQZnDeejRX8aDiWVNCcn",
-        "caption": "Figure 6 Complementary (Complementary Colour is Dominant)"
-    },
-    "Monochromatic (2 lighter shades)": {
-        "definition": """**Monochromatic (2 Lighter Shades)**  
-A colour scheme that uses a single hue along with two lighter tints of that same colour.""",
-        "file_id": "1HRP_LbFDB7M8F2EtLpV5zCt17IF9gxcr",
-        "caption": "Figure 7 Monochromatic (2 Lighter Shades)"
-    },
-    "Monochromatic (1 lighter shade, base colour is dominant)": {
-        "definition": """**Monochromatic (1 Lighter Shade, Base Colour is Dominant)**  
-A single hue complemented by a lighter tint, with the primary colour as the focal point and the lighter shade used sparingly.""",
-        "file_id": "1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
-        "caption": "Figure 8 Monochromatic (1 Lighter Shade, Base Colour is Dominant)"
-    },
-    "Monochromatic (1 lighter shade, lighter shade is dominant)": {
-        "definition": """**Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)**  
-A single hue complemented by a lighter tint, with the lighter shade as the focal point and the primary colour used sparingly.""",
-        "file_id": "1YDPePQz34N-fyCqdxeBzMNiuGJr2neFC",
-        "caption": "Figure 9 Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)"
-    },
-    "No colour harmony strategies": {
-        "definition": """**No Colour Harmony Strategies**  
-Use only a single colour without employing any colour harmony techniques.""",
-        "file_id": "11evyJZ6gDzheZFyQoxGX90ImWT6FYHcU",
-        "caption": "Figure 10 No Colour Harmony Strategies"
-    }
+    # ... keep the rest of your strategies unchanged ...
 }
 
 # Ensure local folder exists
 os.makedirs("color_strategies", exist_ok=True)
 
-# Display each strategy with definition above and caption below
+# Display each strategy with definition above and bold caption below
 for title, info in strategy_definitions.items():
     local_path = f"color_strategies/{title.replace(' ', '_')}.jpg"
     if not os.path.exists(local_path):
         gdown.download(f"https://drive.google.com/uc?id={info['file_id']}", local_path, quiet=False)
     st.markdown(info["definition"])
-    st.image(local_path, caption=info["caption"], width=300)
-    st.markdown("---")  
+    st.image(local_path, width=300)  # no caption here
+    st.markdown(f"**{info['caption']}**")  # bold caption
+    st.markdown("---")
+
 
 
 
