@@ -187,8 +187,7 @@ if mode == "Model Prediction (upload images)":
                 confidence = np.max(pred_probs)
 
                 class_name = CLASS_NAMES[pred_class]
-                description = CLASS_DESCRIPTIONS.get(class_name, "No description available.")
-
+                explanation = CLASS_DESCRIPTIONS.get(class_name, "No explanation available.")
               
                 st.text(f"File: {file.name}")
                 st.text(f"Verdict: {class_name}")
@@ -199,7 +198,7 @@ if mode == "Model Prediction (upload images)":
                     This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
                     For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
                     """
-                )               
+                )          
 
 
                 
