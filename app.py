@@ -167,7 +167,7 @@ if mode == "Model Prediction (upload images)":
         "- Monochromatic (two lighter shades)\n"
         "- Monochromatic (lighter shade dominant), which our studies suggest is not generally inclusive for both genders of users\n"
 
-        "**To improve inclusivity**, try one of the following colour harmony strategies:\n"
+        "- **To improve inclusivity**, try one of the following colour harmony strategies:\n"
             "-  Split complementary colour harmony strategies (three complementary colours)\n"
             "-  Analogous strategy (using three analogous colours)\n"
             "-  Analogous strategy (using two analogous colours, base colour is the dominant colour)"
