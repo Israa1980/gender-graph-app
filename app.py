@@ -269,7 +269,7 @@ elif mode == "Model Evaluation (test folder)":
 
         # Display Results
         st.subheader("Evaluation Results")
-        st.markdown(
+        st. markdown(
             f"""
             - **Test Set Accuracy:** {acc_split:.4f}  
             - **Similar Data Set Accuracy:** {acc_sep:.4f}  
