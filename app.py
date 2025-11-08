@@ -227,16 +227,15 @@ elif mode == "Model Evaluation (test folder)":
         """
         ### What is Evaluation Mode?
         In this mode, the tool tests the trained model on two independent test sets:
-        - **Test Set**: A portion of the original dataset that was set aside during training.
-        - ** Similar data Set**: A completely independent dataset the model has never seen before.
+        - **Test Set**: A portion of the original dataset set aside during training.
+        - **Similar Data Set**: A completely separate dataset that the model has never seen before.
 
         Evaluating on both sets helps you understand:
         - **Accuracy**: How often the model predicts correctly.
         - **Generalisation**: Whether the model performs well on new, unseen data.
-        - **Error patterns**: Which classes are most often confused with each other.
-
-        This is important because a model that only performs well on training data may not be trustworthy in practice. 
-        By comparing results across both test sets, you can judge whether the model is robust and inclusive.
+        - **Error patterns**: Shows which classes the model most often confuses with each other.
+        This is important because a model that only performs well on training data might not be reliable in practice. 
+        By comparing results across both test sets, you can assess whether the model is robust and comprehensive.
         """
     )
     if st.button("Evaluate on Both Test Sets"):
