@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
+import io
 
 # Page Title
 st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
@@ -157,40 +158,41 @@ if mode == "Model Prediction (upload images)":
         )
     }
     
-    if st.button("See Verdict"):
-        if uploaded_files:
-            for file in uploaded_files:
-                image = tf.keras.utils.load_img(file, target_size=(IMG_SIZE, IMG_SIZE))
-                img_array = tf.keras.utils.img_to_array(image) / 255.0
-                img_array = np.expand_dims(img_array, axis=0)
+   
 
-                pred_probs = model.predict(img_array, verbose=0)
-                pred_class = np.argmax(pred_probs, axis=1)[0]
-                confidence = np.max(pred_probs)
+if st.button("See Verdict"):
+    if uploaded_files:
+        for uploaded_file in uploaded_files:
+            # Read the uploaded file into memory
+            image_bytes = uploaded_file.read()
+            image = tf.keras.utils.load_img(
+                io.BytesIO(image_bytes), target_size=(IMG_SIZE, IMG_SIZE)
+            )
+            img_array = tf.keras.utils.img_to_array(image) / 255.0
+            img_array = np.expand_dims(img_array, axis=0)
 
-                class_name = CLASS_NAMES[pred_class]
-                description = CLASS_DESCRIPTIONS.get(class_name, "No description available.")
+            pred_probs = model.predict(img_array, verbose=0)
+            pred_class = np.argmax(pred_probs, axis=1)[0]
+            confidence = np.max(pred_probs)
 
-              
-                st.text(f"File: {file.name}")
-                st.text(f"verdict: {class_name}")
-                st.markdown(
-                    f"""
-                    **Confidence Score:** {confidence:.2f}  
-                    The confidence score indicates how certain the AI model is about the choice it has made. 
-                    This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
-                    For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
-                    """
-                )
-                   
+            class_name = CLASS_NAMES[pred_class]
+            description = CLASS_DESCRIPTIONS.get(class_name, "No description available.")
 
+            st.text(f"File: {uploaded_file.name}")
+            st.text(f"Verdict: {class_name}")
+            st.markdown(
+                f"""
+                **Confidence Score:** {confidence:.2f}  
+                The confidence score indicates how certain the AI model is about the choice it has made. 
+                This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
+                For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
+                """
+            )
+            st.markdown(f"**Description:** {description}")
+            st.markdown("---")
+    else:
+        st.warning("Please upload one or more images.")
 
-                
-
-                st.markdown(f"**Description:** {description}")
-                st.markdown("---")
-        else:
-            st.warning("Please upload one or more images.")
 
 # --- Evaluation Mode ---
 elif mode == "Model Evaluation (test folder)":
