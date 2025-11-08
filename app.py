@@ -202,11 +202,11 @@ if st.button("See Verdict"):
             """
 
             if confidence >= 0.75:
-                confidence_msg += "\n The model is quite confident in this verdict."
-            elif confidence >= 0.5:
-                confidence_msg += "\n The model shows only moderate certainty — there is a noticeable chance this verdict could be wrong."
+                confidence_msg += "\n The model demonstrates strong confidence in this result, making the verdict highly reliable."
+            elif confidence >= 0.60:
+                confidence_msg += "\n The model shows moderate confidence in this prediction. While the outcome may be accurate, there is still a significant chance of error."
             else:
-                confidence_msg += "\n The model is not very confident in this prediction. Treat this verdict with caution and consider it unreliable."
+                confidence_msg += "\n The model’s confidence in this prediction is low. Please handle this result with care, as it may be inaccurate."
 
             st.markdown(confidence_msg)
 
