@@ -19,7 +19,7 @@ you use the two colours adjacent to that complementary colour without choosing t
         "caption": "Figure 1 Split Complementary Colour Strategy"
     },
     "Analogous (3 colours)": {
-        "definition": """**Analogous Colour Strategy **  
+        "definition": """**Analogous Colour Strategy (Three Colours)**  
 Uses three colours sitting side by side on the colour wheel. This creates a harmonious, natural appearance with smooth transitions (see Figure 2).""",
         "file_id": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",
         "caption": "Figure 2 Analogous Colour Strategy (Three Colours)"
