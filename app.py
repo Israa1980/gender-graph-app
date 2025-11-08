@@ -316,6 +316,14 @@ elif mode == "Model Evaluation (test folder)":
 
         st.text("Test Set Report:\n" + report_split)
         st.text("Similar Data Set Report:\n" + report_sep)
+        st.markdown(
+            """
+            **Why this matters:**  
+            - The classification report shows precision, recall, and F1-score for each class.  
+            - These metrics tell you not just *how often* the model is right, but *how well* it handles each class.  
+            - For example, low recall for "inclusive for both genders" would mean the model often fails to recognise charts that are inclusive for both genders.  
+            """
+        )
 
 
 
