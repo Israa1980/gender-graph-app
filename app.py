@@ -5,17 +5,6 @@ import numpy as np
 from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
-import io
-
-# Page Title
-st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
-import os, zipfile, gdown
-import streamlit as st
-import tensorflow as tf
-import numpy as np
-from sklearn.metrics import confusion_matrix, classification_report
-import seaborn as sns
-import matplotlib.pyplot as plt
 # Page Title
 st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
 
@@ -155,8 +144,7 @@ if mode == "Model Prediction (upload images)":
                     This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
                     For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
                     """
-                )
-                   
+                )               
 
 
                 
