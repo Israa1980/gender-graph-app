@@ -223,10 +223,26 @@ if st.button("See Verdict"):
 
 # --- Evaluation Mode ---
 elif mode == "Model Evaluation (test folder)":
+     st.markdown(
+        """
+        ### What is Evaluation Mode?
+        In this mode, the tool tests the trained model on two independent test sets:
+        - **Test Set**: A portion of the original dataset that was set aside during training.
+        - ** Similar data Set**: A completely independent dataset the model has never seen before.
+
+        Evaluating on both sets helps you understand:
+        - **Accuracy**: How often the model predicts correctly.
+        - **Generalisation**: Whether the model performs well on new, unseen data.
+        - **Error patterns**: Which classes are most often confused with each other.
+
+        This is important because a model that only performs well on training data may not be trustworthy in practice. 
+        By comparing results across both test sets, you can judge whether the model is robust and inclusive.
+        """
+    )
     if st.button("Evaluate on Both Test Sets"):
         test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
-        # Split Test Set
+        # Test Set
         split_gen = test_datagen.flow_from_directory(
             "test_1_1",
             target_size=(IMG_SIZE, IMG_SIZE),
@@ -239,7 +255,7 @@ elif mode == "Model Evaluation (test folder)":
         y_true_split = split_gen.classes
         acc_split = np.mean(y_true_split == y_pred_split)
 
-        # Separate Test Set
+        # similar Data Set
         separate_gen = test_datagen.flow_from_directory(
             "test_only_1",
             target_size=(IMG_SIZE, IMG_SIZE),
@@ -254,22 +270,22 @@ elif mode == "Model Evaluation (test folder)":
 
         # Display Results
         st.subheader("Evaluation Results")
-        st.text(f"Split Test Set Accuracy:    {acc_split:.4f}")
-        st.text(f"Separate Test Set Accuracy: {acc_sep:.4f}")
+        st.text(f"Test Set Accuracy:    {acc_split:.4f}")
+        st.text(f"Similar Data Set Accuracy: {acc_sep:.4f}")
 
         # Confusion Matrices
         fig, axes = plt.subplots(1, 2, figsize=(14, 6))
         cm_split = confusion_matrix(y_true_split, y_pred_split)
         sns.heatmap(cm_split, annot=True, fmt="d", cmap="Blues",
                     xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[0])
-        axes[0].set_title("Split Test Set")
+        axes[0].set_title("Test Set")
         axes[0].set_xlabel("Predicted")
         axes[0].set_ylabel("True")
 
         cm_sep = confusion_matrix(y_true_sep, y_pred_sep)
         sns.heatmap(cm_sep, annot=True, fmt="d", cmap="Greens",
                     xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[1])
-        axes[1].set_title("Separate Test Set")
+        axes[1].set_title("Similar Data Set")
         axes[1].set_xlabel("Predicted")
         axes[1].set_ylabel("True")
         plt.tight_layout()
