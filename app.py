@@ -269,8 +269,15 @@ elif mode == "Model Evaluation (test folder)":
 
         # Display Results
         st.subheader("Evaluation Results")
-        st.text(f"Test Set Accuracy:    {acc_split:.4f}")
-        st.text(f"Similar Data Set Accuracy: {acc_sep:.4f}")
+        st.markdown(
+            f"""
+            - **Test Set Accuracy:** {acc_split:.4f}  
+            - **Similar Data Set Accuracy:** {acc_sep:.4f}  
+
+            Higher accuracy means the model is making more correct predictions. 
+            If accuracy is much lower on a similar data set, it suggests the model may not generalise well.
+            """
+        
 
         # Confusion Matrices
         fig, axes = plt.subplots(1, 2, figsize=(14, 6))
@@ -289,14 +296,25 @@ elif mode == "Model Evaluation (test folder)":
         axes[1].set_ylabel("True")
         plt.tight_layout()
         st.pyplot(fig)
+        st.markdown(
+            """
+            **How to read these heatmaps:**  
+            - Each row shows the *true class*.  
+            - Each column shows the *predicted class*.  
+            - Diagonal values are correct predictions.  
+            - Off-diagonal values show misclassifications.  
+
+            This helps you see which inclusivity categories the model confuses most often.
+            """
+        )
 
         # Classification Reports
         st.subheader("Classification Reports")
         report_split = classification_report(y_true_split, y_pred_split, target_names=CLASS_NAMES)
         report_sep = classification_report(y_true_sep, y_pred_sep, target_names=CLASS_NAMES)
 
-        st.text("Split Test Set Report:\n" + report_split)
-        st.text("Separate Test Set Report:\n" + report_sep)
+        st.text("Test Set Report:\n" + report_split)
+        st.text("Similar Data Set Report:\n" + report_sep)
 
 
 
