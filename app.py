@@ -14,7 +14,7 @@ BATCH_SIZE = 16
 CLASS_NAMES = ['inclusive for both genders', 'inclusive for male', 'not inclusive for both genders']
 # --- Download and display Colour Harmony Strategy Images ---
 st.subheader("Color Harmony Strategies")
-st.markdown(
+st. markdown(
     """
     Colour harmony strategies are design approaches that combine colours in ways that feel balanced,
     visually appealing, and accessible. In the context of inclusivity, these strategies help ensure
@@ -316,7 +316,7 @@ elif mode == "Model Evaluation (test folder)":
 
         st.text("Test Set Report:\n" + report_split)
         st.text("Similar Data Set Report:\n" + report_sep)
-        st.markdown(
+        st. markdown(
             """
             **Why this matters:**  
             - The classification report shows precision, recall, and F1-score for each class.  
