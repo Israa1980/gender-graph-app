@@ -156,7 +156,7 @@ if mode == "Model Prediction (upload images)":
 
         ),
        "inclusive for both genders": (
-        " Well done! Your data visualisation is considered **inclusive for both genders** as it uses one of the following colour harmony techniques\n"
+        " Well done! Your data visualisation is considered **inclusive for both genders** as it uses one of the following colour harmony techniques:\n"
         "- Split complementary (three colours)\n"
         "- Analogous (three colours)\n"
         "- Analogous (two colours, base colour dominant),  which our studies suggest is generally inclusive for both genders of users."
