@@ -277,6 +277,7 @@ elif mode == "Model Evaluation (test folder)":
             Higher accuracy means the model is making more correct predictions. 
             If accuracy is much lower on a similar data set, it suggests the model may not generalise well.
             """
+        )
         
 
         # Confusion Matrices
