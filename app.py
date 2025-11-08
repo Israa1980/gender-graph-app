@@ -223,7 +223,7 @@ if st.button("See Verdict"):
 
 # --- Evaluation Mode ---
 elif mode == "Model Evaluation (test folder)":
-     st.markdown(
+    st.markdown(
         """
         ### What is Evaluation Mode?
         In this mode, the tool tests the trained model on two independent test sets:
