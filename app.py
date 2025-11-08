@@ -174,39 +174,50 @@ if mode == "Model Prediction (upload images)":
 
         )
     }
+if st.button("See Verdict"):
+    if uploaded_files:
+        for uploaded_file in uploaded_files:
+            import io
+            image_bytes = uploaded_file.read()
+            image = tf.keras.utils.load_img(io.BytesIO(image_bytes), target_size=(IMG_SIZE, IMG_SIZE))
+            img_array = tf.keras.utils.img_to_array(image) / 255.0
+            img_array = np.expand_dims(img_array, axis=0)
+
+            pred_probs = model.predict(img_array, verbose=0)
+            pred_class = np.argmax(pred_probs, axis=1)[0]
+            confidence = np.max(pred_probs)
+
+            class_name = CLASS_NAMES[pred_class]
+            explanation = CLASS_DESCRIPTIONS.get(class_name, "No explanation available.")
+
+            st.text(f"File: {uploaded_file.name}")
+            st.text(f"Verdict: {class_name}")
+
+            # --- Confidence explanation + warning messages ---
+            confidence_msg = f"""
+            **Confidence Score:** {confidence:.2f}  
+            The confidence score indicates how certain the AI model is about the choice it has made. 
+            This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
+            For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
+            """
+
+            if confidence >= 0.75:
+                confidence_msg += "\n The model is quite confident in this verdict."
+            elif confidence >= 0.5:
+                confidence_msg += "\n The model shows only moderate certainty — there is a noticeable chance this verdict could be wrong."
+            else:
+                confidence_msg += "\n The model is not very confident in this prediction. Treat this verdict with caution and consider it unreliable."
+
+            st.markdown(confidence_msg)
+
+            # --- Show inclusivity explanation ---
+            st.markdown(explanation)
+            st.markdown("---")
+    else:
+        st.warning("Please upload one or more images.")
+
     
-    if st.button("See Verdict"):
-        if uploaded_files:
-            for file in uploaded_files:
-                image = tf.keras.utils.load_img(file, target_size=(IMG_SIZE, IMG_SIZE))
-                img_array = tf.keras.utils.img_to_array(image) / 255.0
-                img_array = np.expand_dims(img_array, axis=0)
-
-                pred_probs = model.predict(img_array, verbose=0)
-                pred_class = np.argmax(pred_probs, axis=1)[0]
-                confidence = np.max(pred_probs)
-
-                class_name = CLASS_NAMES[pred_class]
-                explanation = CLASS_DESCRIPTIONS.get(class_name, "No explanation available.")
-              
-                st.text(f"File: {file.name}")
-                st.text(f"Verdict: {class_name}")
-                st.markdown(
-                    f"""
-                    **Confidence Score:** {confidence:.2f}  
-                    The confidence score indicates how certain the AI model is about the choice it has made. 
-                    This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
-                    For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
-                    """
-                )          
-
-
-                
-
-                st.markdown(explanation)
-                st.markdown("---")
-        else:
-            st.warning("Please upload one or more images.")
+    
 
 
 
