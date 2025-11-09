@@ -305,7 +305,7 @@ elif mode == "Model Evaluation (test folder)":
             - Diagonal values are correct predictions.  
             - Off-diagonal values show misclassifications.  
 
-            This helps you see which inclusivity categories the model confuses most often.
+            This helps you see which classes the model confuses most often.
             """
         )
 
