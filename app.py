@@ -226,7 +226,7 @@ elif mode == "Model Evaluation (test folder)":
     st.markdown(
         """
         ### What is Evaluation Mode?
-        In this mode, the tool tests the trained model on two independent test sets:
+        In this mode, the trained model was evaluated using two separate test sets:
         - **Test Set**: A portion of the original dataset set aside during training.
         - **Similar Data Set**: A completely separate dataset that the model has never seen before.
 
