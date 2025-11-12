@@ -238,6 +238,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         """
     )
     if st.button("Test the Model’s Reliability"):
+        st.caption("Get accuracy scores, confusion matrix, and detailed classification reports")        
         test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
         # Test Set
