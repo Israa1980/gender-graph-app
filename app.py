@@ -226,7 +226,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         - **Similar Data Set**: Completely new data that the model has never encountered is used to evaluate its ability to handle new situations.
 
         Why Test the Model’s Reliability?
-        Evaluating both sets helps you understand:
+        - Evaluating both sets helps you understand:
        - **Accuracy** → how often the model predicts correctly.  
        - **Generalisation** → whether it performs well on new, unseen data.  
        - **Error patterns** → which classes the model most often confuses.  
