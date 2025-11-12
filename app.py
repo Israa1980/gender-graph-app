@@ -105,13 +105,6 @@ for title, info in strategy_definitions.items():
     st.markdown("---")
 
 
-
-
-
-
-# Mode selector
-mode = st.selectbox("Choose mode:", ["Model Prediction (upload images)", "Model Evaluation (test folder)"])
-
 # --- Download model if not already present ---
 if not os.path.exists('small_cnn_1_1.keras'):
     model_file_id = "1nkmMunVmkRCgmPeF_vrsWY56HmPCS9lV"  # replace with your Google Drive file ID
@@ -136,10 +129,10 @@ if not os.path.exists("test_only_1"):
     with zipfile.ZipFile("separate_test.zip", "r") as zip_ref:
         zip_ref.extractall("test_only_1")
 # --- Prediction Mode ---
-if mode == "Model Prediction (upload images)":
-    uploaded_files = st.file_uploader("Choose one or more images...",
-                                      type=["jpg", "jpeg", "png"],
-                                      accept_multiple_files=True)
+# --- Prediction Section ---
+uploaded_files = st.file_uploader("Choose one or more images...",
+                                  type=["jpg", "jpeg", "png"],
+                                  accept_multiple_files=True)
 
     CLASS_DESCRIPTIONS = {
         
@@ -221,8 +214,9 @@ if st.button("See Verdict"):
 
 
 
-# --- Evaluation Mode ---
-elif mode == "Model Evaluation (test folder)":
+# --- Evaluation Section Trigger ---
+with st.expander("Want to Know If a Model Really Works? Click Here"):
+    
     st.markdown(
         """
         ### What is Evaluation Mode?
@@ -238,7 +232,7 @@ elif mode == "Model Evaluation (test folder)":
         By comparing results across both test sets, you can assess whether the model is robust and comprehensive.
         """
     )
-    if st.button("Evaluate on Both Test Sets"):
+   if st.button("Run Model Evaluation"):
         test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
         # Test Set
