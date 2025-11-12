@@ -219,20 +219,25 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
     
     st.markdown(
         """
-        ### What is Evaluation Mode?
-        In this mode, the trained model was evaluated using two separate test sets:
-        - **Test Set**: A portion of the original dataset set aside during training.
-        - **Similar Data Set**: A completely separate dataset that the model has never seen before.
+        ### What Does “Evaluation” Mean?
+        Evaluation is like a reality check for the model. 
+        We test it on two kinds of data:
+        - **Test Set**: Data saved from training, used to check how well the model learned.
+        - **Similar Data Set**: Completely new data that the model has never encountered is used to evaluate its ability to handle new situations.
 
-        Evaluating on both sets helps you understand:
-        - **Accuracy**: How often the model predicts correctly.
-        - **Generalisation**: Whether the model performs well on new, unseen data.
-        - **Error patterns**: Shows which classes the model most often confuses with each other.
-        This is important because a model that only performs well on training data might not be reliable in practice. 
-        By comparing results across both test sets, you can assess whether the model is robust and comprehensive.
+        Why Test the Model’s Reliability?
+        Evaluating both sets helps you understand:
+       - **Accuracy** → how often the model predicts correctly.  
+       - **Generalisation** → whether it performs well on new, unseen data.  
+       - **Error patterns** → which classes the model most often confuses.  
+
+        This matters because a model that performs well only on training data may not be trustworthy in practice.  
+        By comparing results across both test sets, you can see if the model is truly **robust and reliable**.
+
+        Click below to **Test the Model’s Reliability** and view the full performance report.
         """
     )
-    if st.button("Run Model Evaluation"):
+    if st.button("Test the Model’s Reliability"):
         test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
         # Test Set
