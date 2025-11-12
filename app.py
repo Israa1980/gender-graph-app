@@ -134,7 +134,7 @@ uploaded_files = st.file_uploader("Choose one or more images...",
                                   type=["jpg", "jpeg", "png"],
                                   accept_multiple_files=True)
 
-    CLASS_DESCRIPTIONS = {
+CLASS_DESCRIPTIONS = {
         
            "inclusive for male": (
                " Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques:\n"
