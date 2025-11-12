@@ -232,7 +232,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         By comparing results across both test sets, you can assess whether the model is robust and comprehensive.
         """
     )
-   if st.button("Run Model Evaluation"):
+    if st.button("Run Model Evaluation"):
         test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
         # Test Set
