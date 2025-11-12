@@ -20,7 +20,7 @@ st. markdown(
     visually appealing, and accessible. In the context of inclusivity, these strategies help ensure
     that data visualisations are welcoming and easy to interpret for a wider audience.
     By applying harmonious colour schemes, we reduce bias, improve readability, and make charts
-    more engaging for everyone, regardless of gender or background.
+    more engaging for everyone, regardless of gender or background. Here are some well-known colour harmony strategies.
     """
 )
 
@@ -319,9 +319,10 @@ elif mode == "Model Evaluation (test folder)":
         st. markdown(
             """
             **Why this matters:**  
-            - The classification report shows precision, recall, and F1-score for each class.  
-            - These metrics tell you not just *how often* the model is right, but *how well* it handles each class.  
-            - For example, low recall for "inclusive for both genders" would mean the model often fails to recognise charts that are inclusive for both genders.  
+        - The classification report displays precision, recall, and F1-score for each class.
+        - These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
+        - For instance, low recall for "inclusive for both genders" would imply that the model frequently fails to recognise charts that are inclusive for both genders.  
+            
             """
         )
 
