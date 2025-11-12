@@ -316,6 +316,13 @@ elif mode == "Model Evaluation (test folder)":
 
         st.text("Test Set Report:\n" + report_split)
         st.text("Similar Data Set Report:\n" + report_sep)
+        # Add explanation
+        st.markdown(
+           """
+     **A high accuracy score indicates that the model correctly identifies most visualisations, demonstrating its reliability and consistency across various test sets.**  
+    
+          """
+      )
         st. markdown(
             """
             **Why this matters:**  
