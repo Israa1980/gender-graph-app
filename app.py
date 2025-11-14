@@ -149,14 +149,9 @@ CLASS_DESCRIPTIONS = {
         "- Split complementary (three colours)\n"
         "- Analogous (three colours)\n"
         "- Analogous (two colours, base colour dominant),  which our studies suggest is generally inclusive for both genders of users."
-        ),
-        "not inclusive for both genders": (
-        " Your visualisation is considered **not inclusive for both genders** as it uses one of the following colour harmony techniques:\n"
-        "- No colour strategy (all bars one colour)\n"
-        "- Monochromatic (two lighter shades)\n"
-        "- Monochromatic (lighter shade dominant), which our studies suggest is not generally inclusive for both genders of users\n"
+        ),        
 
-       "not inclusive for both genders": (
+        "not inclusive for both genders": (
         "Your visualisation is considered **not inclusive for both genders** as it uses one of the following colour harmony techniques: "
         "no colour strategy (all bars one colour), monochromatic with two lighter shades, or monochromatic where the lighter shade is dominant. "
         "Our studies suggest these approaches are not generally inclusive for both genders of users. "
