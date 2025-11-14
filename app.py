@@ -156,11 +156,13 @@ CLASS_DESCRIPTIONS = {
         "- Monochromatic (two lighter shades)\n"
         "- Monochromatic (lighter shade dominant), which our studies suggest is not generally inclusive for both genders of users\n"
 
-        "- **To improve inclusivity**, try one of the following colour harmony strategies:\n"
-            "-  Split complementary colour harmony strategies (three complementary colours)\n"
-            "-  Analogous strategy (using three analogous colours)\n"
-            "-  Analogous strategy (using two analogous colours, base colour is the dominant colour)"
-
+       "not inclusive for both genders": (
+        "Your visualisation is considered **not inclusive for both genders** as it uses one of the following colour harmony techniques: "
+        "no colour strategy (all bars one colour), monochromatic with two lighter shades, or monochromatic where the lighter shade is dominant. "
+        "Our studies suggest these approaches are not generally inclusive for both genders of users. "
+        "To improve inclusivity, you could adopt strategies such as split complementary colour harmony (three complementary colours), "
+        "an analogous strategy using three analogous colours, or an analogous strategy with two analogous colours where the base colour is dominant."
+    )
         )
     }
 if st.button("See Verdict"):
