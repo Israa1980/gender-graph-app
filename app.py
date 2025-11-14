@@ -140,7 +140,8 @@ CLASS_DESCRIPTIONS = {
                "Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques: "
                 "Complementary colour strategy (base colour dominant), complementary colour strategy (complementary colour dominant), "
                 "monochromatic strategy (base colour dominant), or analogous strategy (analogous colour dominant),"
-                "which our studies suggest these approaches are generally inclusive for male users. "To improve inclusivity, you could adopt strategies such as split complementary colour harmony (three complementary colours), "
+                "which our studies suggest these approaches are generally inclusive for male users."
+                "To improve inclusivity, you could adopt strategies such as split complementary colour harmony (three complementary colours), "
                 "an analogous strategy using three analogous colours, or an analogous strategy with two analogous colours where the base colour is dominant."
     ),
        "inclusive for both genders": (
