@@ -315,6 +315,10 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
        # Convert to DataFrames
         df_split = pd.DataFrame(report_split_dict).transpose()
         df_sep = pd.DataFrame(report_sep_dict).transpose()
+        # Drop summary rows you don’t want
+        rows_to_drop = ["accuracy", "macro avg", "weighted avg"]
+        df_split = df_split.drop(rows_to_drop, errors="ignore")
+        df_sep = df_sep.drop(rows_to_drop, errors="ignore")
 
        # Display nicely in tables
         st.markdown("**Test Set Report**")
@@ -325,10 +329,15 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
        
         st. markdown(
             """
-            **Why this matters:**
-        - The classification report displays precision, recall, and F1-score for each class.
-        - These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
-        - For instance, low recall for "inclusive for both genders" would imply that the model frequently fails to recognise charts that are inclusive for both genders.
+            **Why this matters:**  
+            The tables show precision, recall, F1-score, and support for each class.  
+            - **Precision**: How often predictions for a class are correct.  
+            - **Recall**: How often the class is correctly identified.  
+            - **F1-score**: Balance between precision and recall.  
+            - **Support**: Number of samples for each class.  
+       
+          - These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
+          - For instance, low recall for "inclusive for both genders" would imply that the model frequently fails to recognise charts that are inclusive for both genders.
 
             """
         )
