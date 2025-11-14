@@ -317,11 +317,11 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         df_sep = pd.DataFrame(report_sep_dict).transpose()
 
        # Display nicely in tables
-       st.markdown("**Test Set Report**")
-       st.dataframe(df_split.style.format({"precision": "{:.2f}", "recall": "{:.2f}", "f1-score": "{:.2f}", "support": "{:.0f}"}))
+        st.markdown("**Test Set Report**")
+        st.dataframe(df_split.style.format({"precision": "{:.2f}", "recall": "{:.2f}", "f1-score": "{:.2f}", "support": "{:.0f}"}))
 
-       st.markdown("**Similar Data Set Report**")
-       st.dataframe(df_sep.style.format({"precision": "{:.2f}", "recall": "{:.2f}", "f1-score": "{:.2f}", "support": "{:.0f}"}))
+        st.markdown("**Similar Data Set Report**")
+        st.dataframe(df_sep.style.format({"precision": "{:.2f}", "recall": "{:.2f}", "f1-score": "{:.2f}", "support": "{:.0f}"}))
        
        st. markdown(
             """
