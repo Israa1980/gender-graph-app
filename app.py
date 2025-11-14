@@ -158,7 +158,7 @@ CLASS_DESCRIPTIONS = {
         "To improve inclusivity, you could adopt strategies such as split complementary colour harmony (three complementary colours), "
         "an analogous strategy using three analogous colours, or an analogous strategy with two analogous colours where the base colour is dominant."
     )
-        )
+        
     }
 if st.button("See Verdict"):
     if uploaded_files:
