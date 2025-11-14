@@ -211,7 +211,7 @@ if st.button("See Verdict"):
 
 # Initialize session state for expander
 if "expander_open" not in st.session_state:
-    st.session_state.expander_open = False
+    st.session_state.expander_open = True
 # --- Evaluation Section Trigger ---
 with st.expander("Want to Know If a Model Really Works? Click Here"):
     
