@@ -203,11 +203,15 @@ if st.button("See Verdict"):
     else:
         st.warning("Please upload one or more images.")
 
+
+
     
     
 
 
-
+# Initialize session state for expander
+if "expander_open" not in st.session_state:
+    st.session_state.expander_open = False
 # --- Evaluation Section Trigger ---
 with st.expander("Want to Know If a Model Really Works? Click Here"):
     
