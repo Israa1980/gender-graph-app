@@ -222,14 +222,14 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         ### What Does “Evaluation” Mean?
         Evaluation is like a reality check for the model. 
         We test it on two kinds of data:
-        - **Test Set**: Data saved from training, used to check how well the model learned.
-        - **Similar Data Set**: Completely new data that the model has never encountered is used to evaluate its ability to handle new situations.
+        **Test Set**: Data saved from training, used to check how well the model learned.  
+        **Similar Data Set**: Completely new data that the model has never encountered is used to evaluate its ability to handle new situations.
 
-        Why Test the Model’s Reliability?
-        - Evaluating both sets helps you understand:
-       - **Accuracy** → how often the model predicts correctly.  
-       - **Generalisation** → whether it performs well on new, unseen data.  
-       - **Error patterns** → which classes the model most often confuses.  
+        Why Test the Model’s Reliability?  
+        Evaluating both sets helps you understand three key aspects:  
+        **Accuracy** refers to how often the model predicts correctly.  
+        **Generalisation** shows whether it performs well on new, unseen data.  
+        **Error patterns** reveal which classes the model most often confuses. 
 
         This matters because a model that performs well only on training data may not be trustworthy in practice.  
         By comparing results across both test sets, you can see if the model is truly **robust and reliable**.
