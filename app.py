@@ -221,7 +221,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         """
         ### What Does “Evaluation” Mean?
         Evaluation is like a reality check for the model. 
-        We test it on two kinds of data:
+        We test it on two kinds of data:\n
         **Test Set**: Data saved from training, used to check how well the model learned.  
         **Similar Data Set**: Completely new data that the model has never encountered is used to evaluate its ability to handle new situations.
 
