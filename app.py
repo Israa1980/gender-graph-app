@@ -313,8 +313,8 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
 
 
        # Convert to DataFrames
-       df_split = pd.DataFrame(report_split_dict).transpose()
-       df_sep = pd.DataFrame(report_sep_dict).transpose()
+        df_split = pd.DataFrame(report_split_dict).transpose()
+        df_sep = pd.DataFrame(report_sep_dict).transpose()
 
        # Display nicely in tables
        st.markdown("**Test Set Report**")
