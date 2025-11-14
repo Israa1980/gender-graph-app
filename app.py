@@ -137,17 +137,13 @@ uploaded_files = st.file_uploader("Choose one or more images...",
 CLASS_DESCRIPTIONS = {
         
            "inclusive for male": (
-               " Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques:\n"
-               "-  Complementary colour strategy (base colour dominant)\n"
-               "-  Complementary colour strategy (complementary colour dominant)\n"
-               "-  Monochromatic strategy (base colour dominant)\n"
-               "-  Analogous strategy (analogous colour dominant), which our studies suggest is generally inclusive for male users.\n"
-               "- **To make it inclusive for both genders**, try strategies like split complementary or three-colour analogous schemes\n"
-               "- Split complementary colour harmony strategies (three complementary colours)\n"
-               "- Analogous strategy (using three analogous colours)\n"
-               "- Analogous strategy (using two analogous colours, base colour is the dominant colour)"
-
-        ),
+               "Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques: "
+                "Complementary colour strategy (base colour dominant), complementary colour strategy (complementary colour dominant), "
+                "monochromatic strategy (base colour dominant), or analogous strategy (analogous colour dominant), which our studies suggest "
+                "is generally inclusive for male users. To make it inclusive for both genders, try strategies like split complementary or "
+                "three-colour analogous schemes. For example, you could use split complementary colour harmony strategies (three complementary colours), "
+                "an analogous strategy with three analogous colours, or an analogous strategy with two analogous colours where the base colour is dominant."
+    ),
        "inclusive for both genders": (
         " Well done! Your data visualisation is considered **inclusive for both genders** as it uses one of the following colour harmony techniques:\n"
         "- Split complementary (three colours)\n"
