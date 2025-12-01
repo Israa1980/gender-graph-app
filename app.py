@@ -61,7 +61,7 @@ Uses two neighbouring colours on the wheel, with the adjacent colour as the main
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents (see Figure 5).""",
         "file_id": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
-          "wheel_file_id": "1gD1Z9ybMVDZFclVkPwR-62EW1jRAgiuk", # colour wheel image
+          "wheel_file_id": "1w7dBh0vpqeh-niIAr5dex3Ii_NMBa4XQ", # colour wheel image
         "caption": "Figure 5 Complementary (Base Colour is Dominant)"
     },
     "Complementary (complementary colour is dominant)": {
@@ -69,21 +69,21 @@ The base colour serves as the main focus, covering most of the design, while the
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The complementary colour serves as the main focus, covering most of the design, while the base colour is used in small amounts for accents (see Figure 6).""",
         "file_id": "1dGtQSmx2f1jfMQZnDeejRX8aDiWVNCcn",
-        "wheel_file_id": "1Xk_sxsqchcJmZGxCYBCAe_bBfLF_Zrk2", # colour wheel image
+        "wheel_file_id": "1n5_vfneBBB0DVRB3WnZTxx1hRH_6odUf", # colour wheel image
         "caption": "Figure 6 Complementary (Complementary Colour is Dominant)"
     },
     "Monochromatic (2 lighter shades)": {
         "definition": """**Monochromatic (2 Lighter Shades)**  
 A colour scheme that uses a single hue along with two lighter tints of that same colour (see Figure 7).""",
         "file_id": "1HRP_LbFDB7M8F2EtLpV5zCt17IF9gxcr",
-         "wheel_file_id": "1IYz4IPqdGo9Jel1JRyVu0MURYbMtrhxV", # colour wheel image
+         "wheel_file_id": "1SkN1pIPiEsNSLz7ynO-F8Gfuyk4EDaL_", # colour wheel image
         "caption": "Figure 7 Monochromatic (2 Lighter Shades)"
     },
     "Monochromatic (1 lighter shade, base colour is dominant)": {
         "definition": """**Monochromatic (1 Lighter Shade, Base Colour is Dominant)**  
 A single hue complemented by a lighter tint, with the primary colour as the focal point and the lighter shade used sparingly (see Figure 8).""",
         "file_id": "1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
-        "wheel_file_id": "1Xk_sxsqchcJmZGxCYBCAe_bBfLF_Zrk2", # colour wheel image
+        "wheel_file_id": "1InFhYABbtQPtSAc1VMkkvuitSAGXwQQu", # colour wheel image
         "caption": "Figure 8 Monochromatic (1 Lighter Shade, Base Colour is Dominant)"
     },
     "Monochromatic (1 lighter shade, lighter shade is dominant)": {
