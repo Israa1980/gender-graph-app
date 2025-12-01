@@ -31,13 +31,15 @@ strategy_definitions = {
         "definition": """**Split Complementary Colour Strategy**  
 A variation of complementary colours. You start with one base colour, then instead of using its direct opposite, 
 you use the two colours adjacent to that complementary colour without choosing the complementary colour itself (see Figure 1).""",
-        "file_id": "1szBjfSzXe9evKK9i0NfoFvvhsgoX21zZ",
+        "file_id": "1szBjfSzXe9evKK9i0NfoFvvhsgoX21zZ",   # bar chart image
+        "wheel_file_id": "1kqXHt54GBMpPfkITifzdPm5JaKb7EczV", # colour wheel image
         "caption": "Figure 1 Split Complementary Colour Strategy"
     },
     "Analogous (3 colours)": {
         "definition": """**Analogous Colour Strategy (Three Colours)**  
 Uses three colours sitting side by side on the colour wheel. This creates a harmonious, natural appearance with smooth transitions (see Figure 2).""",
         "file_id": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",
+        "wheel_file_id": "1bKGz8LRPJTNZhWf4q4zvlb9vSpusZa8A", # colour wheel image
         "caption": "Figure 2 Analogous Colour Strategy (Three Colours)"
     },
     "Analogous (2 colours, base colour is dominant)": {
@@ -57,6 +59,7 @@ Uses two neighbouring colours on the wheel, with the adjacent colour as the main
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents (see Figure 5).""",
         "file_id": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
+          "wheel_file_id": "12aSA29m5I-TkNnqX_x3KWBKlQq4wTFbh", # colour wheel image
         "caption": "Figure 5 Complementary (Base Colour is Dominant)"
     },
     "Complementary (complementary colour is dominant)": {
@@ -70,6 +73,7 @@ The complementary colour serves as the main focus, covering most of the design, 
         "definition": """**Monochromatic (2 Lighter Shades)**  
 A colour scheme that uses a single hue along with two lighter tints of that same colour (see Figure 7).""",
         "file_id": "1HRP_LbFDB7M8F2EtLpV5zCt17IF9gxcr",
+         "wheel_file_id": "1IYz4IPqdGo9Jel1JRyVu0MURYbMtrhxV", # colour wheel image
         "caption": "Figure 7 Monochromatic (2 Lighter Shades)"
     },
     "Monochromatic (1 lighter shade, base colour is dominant)": {
@@ -97,12 +101,28 @@ os.makedirs("color_strategies", exist_ok=True)
 
 # Display each strategy with definition above and bold caption below
 for title, info in strategy_definitions.items():
-    local_path = f"color_strategies/{title.replace(' ', '_')}.jpg"
-    if not os.path.exists(local_path):
-        gdown.download(f"https://drive.google.com/uc?id={info['file_id']}", local_path, quiet=False)
+    # Paths for bar chart and wheel images
+    chart_path = f"color_strategies/{title.replace(' ', '_')}_chart.jpg"
+    wheel_path = f"color_strategies/{title.replace(' ', '_')}_wheel.jpg"
+
+    # Download bar chart image
+    if not os.path.exists(chart_path):
+        gdown.download(f"https://drive.google.com/uc?id={info['file_id']}", chart_path, quiet=False)
+
+    # Download wheel image
+    if "wheel_file_id" in info and not os.path.exists(wheel_path):
+        gdown.download(f"https://drive.google.com/uc?id={info['wheel_file_id']}", wheel_path, quiet=False)
+
+    # Show definition
     st.markdown(info["definition"])
-    st.image(local_path, width=300)  # show image
-    st.markdown(f"**{info['caption']}**")  # bold caption
+    # Side-by-side display
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image(chart_path, width=300, caption=info["caption"])
+    with col2:
+        if "wheel_file_id" in info:
+            st.image(wheel_path, width=300, caption="Colour Wheel Illustration")
+
     st.markdown("---")
 
 
