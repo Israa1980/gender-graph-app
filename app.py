@@ -46,6 +46,7 @@ Uses three colours sitting side by side on the colour wheel. This creates a harm
         "definition": """**Analogous (2 Colours, Base Colour is Dominant)**  
 Uses two neighbouring colours on the wheel, with the base colour as the main focus and the adjacent colour serving as a secondary accent (see Figure 3).""",
         "file_id": "1v40ReTUNP7VcGqsKRRJJyQ4Mj7U9l0rT",
+        "wheel_file_id": "1SiHSaSWj9cVbSefwiY13ar3RroCb6sLZ",
         "caption": "Figure 3 Analogous (2 Colours, Base Colour is Dominant)"
     },
     "Analogous (2 colours, Analogous colour is dominant)": {
