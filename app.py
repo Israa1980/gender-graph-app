@@ -53,7 +53,7 @@ Uses two neighbouring colours on the wheel, with the base colour as the main foc
         "definition": """**Analogous (2 Colours, Analogous Colour is Dominant)**  
 Uses two neighbouring colours on the wheel, with the adjacent colour as the main focus and the base colour acting as a secondary accent (see Figure 4).""",
         "file_id": "1A9876j8pMySQeOhkgT6tJueOGMuXLHGD",
-        "wheel_file_id": "1Xk_sxsqchcJmZGxCYBCAe_bBfLF_Zrk2", # colour wheel image
+        "wheel_file_id": "16kF74Ig4FdVbsge3xFlGjm_XBm2l-TXC", # colour wheel image
         "caption": "Figure 4 Analogous (2 Colours, Analogous Colour is Dominant)"
     },
     "Complementary (base colour is dominant)": {
@@ -61,7 +61,7 @@ Uses two neighbouring colours on the wheel, with the adjacent colour as the main
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents (see Figure 5).""",
         "file_id": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
-          "wheel_file_id": "12aSA29m5I-TkNnqX_x3KWBKlQq4wTFbh", # colour wheel image
+          "wheel_file_id": "1gD1Z9ybMVDZFclVkPwR-62EW1jRAgiuk", # colour wheel image
         "caption": "Figure 5 Complementary (Base Colour is Dominant)"
     },
     "Complementary (complementary colour is dominant)": {
