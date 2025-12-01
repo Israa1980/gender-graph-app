@@ -39,7 +39,7 @@ you use the two colours adjacent to that complementary colour without choosing t
         "definition": """**Analogous Colour Strategy (Three Colours)**  
 Uses three colours sitting side by side on the colour wheel. This creates a harmonious, natural appearance with smooth transitions (see Figure 2).""",
         "file_id": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",
-         "wheel_file_id": "1VFqdudW9tr44I0nxrrDt2mlD5TreNKrP"
+         "wheel_file_id": "1VFqdudW9tr44I0nxrrDt2mlD5TreNKrP",
         "caption": "Figure 2 Analogous Colour Strategy (Three Colours)"
     },
     "Analogous (2 colours, base colour is dominant)": {
