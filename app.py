@@ -32,14 +32,13 @@ strategy_definitions = {
 A variation of complementary colours. You start with one base colour, then instead of using its direct opposite, 
 you use the two colours adjacent to that complementary colour without choosing the complementary colour itself (see Figure 1).""",
         "file_id": "1szBjfSzXe9evKK9i0NfoFvvhsgoX21zZ",   # bar chart image
-        "wheel_file_id": "1Xk_sxsqchcJmZGxCYBCAe_bBfLF_Zrk2", # colour wheel image        
+        "wheel_file_id": "1obpVjAJ3vkMroJR98BNRt9Fc4bEoIgqB", # colour wheel image        
         "caption": "Figure 1 Split Complementary Colour Strategy"
     },
     "Analogous (3 colours)": {
         "definition": """**Analogous Colour Strategy (Three Colours)**  
 Uses three colours sitting side by side on the colour wheel. This creates a harmonious, natural appearance with smooth transitions (see Figure 2).""",
-        "file_id": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",
-      
+        "file_id": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",      
         "caption": "Figure 2 Analogous Colour Strategy (Three Colours)"
     },
     "Analogous (2 colours, base colour is dominant)": {
