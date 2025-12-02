@@ -90,7 +90,7 @@ A single hue complemented by a lighter tint, with the primary colour as the foca
         "definition": """**Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)**  
 A single hue complemented by a lighter tint, with the lighter shade as the focal point and the primary colour used sparingly (see Figure 9).""",
         "file_id": "1YDPePQz34N-fyCqdxeBzMNiuGJr2neFC",
-        "wheel_file_id": "1Xk_sxsqchcJmZGxCYBCAe_bBfLF_Zrk2", # colour wheel image
+        "wheel_file_id": "1BSzicMqCyjJJJOF0OEVN9WvVaRobQC9o", # colour wheel image
         "caption": "Figure 9 Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)"
     },
     "No colour harmony strategies": {
