@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
+import tempfile
 # Page Title
 st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
 
@@ -160,32 +161,70 @@ uploaded_files = st.file_uploader("Choose one or more images...",
                                   type=["jpg", "jpeg", "png"],
                                   accept_multiple_files=True)
 
+
+
+
+
+# --- Class descriptions ---
 CLASS_DESCRIPTIONS = {
-        
-           "inclusive for male": (
-               "Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques: "
-                "Complementary colour strategy (base colour dominant), complementary colour strategy (complementary colour dominant), "
-                "monochromatic strategy (base colour dominant), or analogous strategy (analogous colour dominant),"
-                "which our studies suggest these approaches are generally inclusive for male users.\n"
-                "To improve inclusivity, you could adopt strategies such as split complementary colour harmony (three complementary colours), "
-                "an analogous strategy using three analogous colours, or an analogous strategy with two analogous colours where the base colour is dominant."
+    "inclusive for male": (
+        "Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques: "
+        "Complementary colour strategy (base colour dominant), complementary colour strategy (complementary colour dominant), "
+        "monochromatic strategy (base colour dominant), or analogous strategy (analogous colour dominant), "
+        "which our studies suggest these approaches are generally inclusive for male users.\n\n"
+        "**To improve inclusivity**, you could adopt strategies such as:\n"
+        "- Split complementary colour harmony (three complementary colours)\n"
+        "- Analogous strategy using three analogous colours\n"
+        "- Analogous strategy with two analogous colours where the base colour is dominant."
     ),
-       "inclusive for both genders": (
-        " Well done! Your data visualisation is considered **inclusive for both genders** as it uses one of the following colour harmony techniques:\n"
+    "inclusive for both genders": (
+        "Well done! Your data visualisation is considered **inclusive for both genders** as it uses one of the following colour harmony techniques:\n"
         "- Split complementary (three colours)\n"
         "- Analogous (three colours)\n"
-        "- Analogous (two colours, base colour dominant),  which our studies suggest is generally inclusive for both genders of users."
-        ),        
-
-        "not inclusive for both genders": (
+        "- Analogous (two colours, base colour dominant), which our studies suggest is generally inclusive for both genders of users."
+    ),
+    "not inclusive for both genders": (
         "Your visualisation is considered **not inclusive for both genders** as it uses one of the following colour harmony techniques: "
         "no colour strategy (all bars one colour), monochromatic with two lighter shades, or monochromatic where the lighter shade is dominant. "
-        "Our studies suggest these approaches are not generally inclusive for both genders of users.\n"
-        "To improve inclusivity, you could adopt strategies such as split complementary colour harmony (three complementary colours), "
-        "an analogous strategy using three analogous colours, or an analogous strategy with two analogous colours where the base colour is dominant."
+        "Our studies suggest these approaches are not generally inclusive for both genders of users.\n\n"
+        "**To improve inclusivity**, you could adopt strategies such as:\n"
+        "- Split complementary colour harmony (three complementary colours)\n"
+        "- Analogous strategy using three analogous colours\n"
+        "- Analogous strategy with two analogous colours where the base colour is dominant."
     )
-        
+}
+
+# --- Improvement strategy image mapping ---
+IMPROVEMENT_IMAGES = {
+    "split_complementary": {
+        "file_id": "11xPmNavyXrtnX-2s5M82WQAaupyy9UvB",
+        "desc": "Split complementary colour harmony (three complementary colours)."
+    },
+    "analogous_three": {
+        "file_id": "1wKXUv_NJiMsulV0_-J1FYWCG9pq-lPHJ",
+        "desc": "Analogous strategy using three analogous colours."
+    },
+    "analogous_two_base": {
+        "file_id": "18t8PXkyWvPT9K-pBz5Yrp9vVKRFa1SuU",
+        "desc": "Analogous strategy with two analogous colours where the base colour is dominant."
     }
+}
+
+# --- Verdict-to-strategy mapping ---
+VERDICT_IMPROVEMENTS = {
+    "inclusive for male": ["split_complementary", "analogous_three", "analogous_two_base"],
+    "not inclusive for both genders": ["split_complementary", "analogous_three", "analogous_two_base"]
+}
+
+# --- Helper to download image from Drive by file ID ---
+def download_image(file_id, target_dir=tempfile.gettempdir()):
+    out_path = os.path.join(target_dir, f"{file_id}.png")
+    if not os.path.exists(out_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, out_path, quiet=True)
+    return out_path
+
+# --- Main Streamlit logic ---
 if st.button("See Verdict"):
     if uploaded_files:
         for uploaded_file in uploaded_files:
@@ -205,29 +244,40 @@ if st.button("See Verdict"):
             st.text(f"File: {uploaded_file.name}")
             st.text(f"Verdict: {class_name}")
 
-            # --- Confidence explanation + warning messages ---
+            # --- Confidence explanation ---
             confidence_msg = f"""
             **Confidence Score:** {confidence:.2f}  
             The confidence score indicates how certain the AI model is about the choice it has made. 
             This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
             For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
             """
-
             if confidence >= 0.75:
                 confidence_msg += "\n The model demonstrates strong confidence in this result, making the verdict highly reliable."
             elif confidence >= 0.60:
                 confidence_msg += "\n The model shows moderate confidence in this prediction. While the outcome may be accurate, there is still a significant chance of error."
             else:
-                confidence_msg += "\n The model’s confidence in this prediction is low, so keep in mind it could be incorrect. "
+                confidence_msg += "\n The model’s confidence in this prediction is low, so keep in mind it could be incorrect."
 
             st.markdown(confidence_msg)
 
-            # --- Show inclusivity explanation ---
+            # --- Explanation ---
             st.markdown(explanation)
             st.markdown("---")
+
+            # --- Show improvement examples if applicable ---
+            if class_name in VERDICT_IMPROVEMENTS:
+                st.markdown("**Visual examples of suggested strategies:**")
+                for strategy_key in VERDICT_IMPROVEMENTS[class_name]:
+                    strategy = IMPROVEMENT_IMAGES.get(strategy_key)
+                    if strategy:
+                        try:
+                            img_path = download_image(strategy["file_id"])
+                            st.image(img_path, width=400)
+                            st.markdown(strategy["desc"])
+                        except Exception as e:
+                            st.warning(f"Could not load image for {strategy_key}.")
     else:
         st.warning("Please upload one or more images.")
-
 
 
     
