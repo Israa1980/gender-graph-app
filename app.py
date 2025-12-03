@@ -10,45 +10,42 @@ import tempfile
 # Page Title
 st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
 # --- App Overview / Mindmap ---
-st.markdown(
-    """
-    <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; border: 1px solid #ffeeba;">
-        <h2 style="color: #856404;">App Overview: How to Navigate</h2>
-        <p>Welcome to the <strong>Data Visualisation Inclusivity Assessment Tool: Gender Focus</strong>.</p>
-        <p>This app helps you evaluate whether your data visualisations are inclusive across gender perspectives,
-        and provides improvement suggestions with visual examples.</p>
+with st.container():
+    st.markdown("### 🟨 App Overview: How to Navigate")
 
-        <h4 style="color: #856404;">Navigation Flow</h4>
-        <ol>
-            <li><strong>Learn Colour Harmony Strategies</strong><br>
-                Explore definitions and examples of different colour harmony strategies.<br>
-                Each strategy is explained with a chart and colour wheel illustration.
-            </li>
-            <li><strong>Upload Your Visualisation</strong><br>
-                Use the uploader to provide one or more images of your data visualisation, as you can add as many images as needed, and click the 'See the Verdict' button to view all results at once.<br>
-                <em>Note: For more accurate results, it is preferable to upload images sized <strong>150 × 150 pixels</strong> (width × height). Larger or smaller images will still work, but may slightly affect prediction accuracy.</em>
-            </li>
-            <li><strong>See Verdict</strong><br>
-                The model analyses your visualisation and provides a verdict:<br>
-                – Inclusive for both genders<br>
-                – Inclusive for male<br>
-                – Not inclusive for both genders<br>
-                You’ll also see a confidence score explaining how certain the model is.
-            </li>
-            <li><strong>Improvement Suggestions</strong><br>
-                If your visualisation is not fully inclusive, you’ll get tailored improvement strategies.<br>
-                Example images are shown to help you apply these strategies in practice.
-            </li>
-            <li><strong>Model Evaluation (Optional)</strong><br>
-                Curious about reliability? Expand the evaluation section to see accuracy, confusion matrices, and classification reports.<br>
-                This helps you understand how robust the model is across different test sets.
-            </li>
-        </ol>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    st.markdown("""
+Welcome to the **Data Visualisation Inclusivity Assessment Tool: Gender Focus**.  
+This app helps you evaluate whether your data visualisations are inclusive across gender perspectives,  
+and provides improvement suggestions with visual examples.
 
+---
+
+#### 🔁 Navigation Flow
+
+1. **Learn Colour Harmony Strategies**  
+   - Explore definitions and examples of different colour harmony strategies.  
+   - Each strategy is explained with a chart and colour wheel illustration.
+
+2. **Upload Your Visualisation**  
+   - Use the uploader to provide one or more images of your data visualisation, as you can add as many images as needed, and click the 'See the Verdict' button to view all results at once.  
+   - *Note*: For more accurate results, it is preferable to upload images sized **150 × 150 pixels** (width × height).  
+     Larger or smaller images will still work, but may slightly affect prediction accuracy.
+
+3. **See Verdict**  
+   - The model analyses your visualisation and provides a verdict:  
+     - Inclusive for both genders  
+     - Inclusive for male  
+     - Not inclusive for both genders  
+   - You’ll also see a confidence score explaining how certain the model is.
+
+4. **Improvement Suggestions**  
+   - If your visualisation is not fully inclusive, you’ll get tailored improvement strategies.  
+   - Example images are shown to help you apply these strategies in practice.
+
+5. **Model Evaluation (Optional)**  
+   - Curious about reliability? Expand the evaluation section to see accuracy, confusion matrices, and classification reports.  
+   - This helps you understand how robust the model is across different test sets.
+""")
 
 # Constants
 IMG_SIZE = 150
