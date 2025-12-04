@@ -62,72 +62,72 @@ strategy_definitions = {
         "definition": """**Split Complementary Colour Strategy**  
 A variation of complementary colours. You start with one base colour, then instead of using its direct opposite, 
 you use the two colours adjacent to that complementary colour without choosing the complementary colour itself (see Figure 1).""",
-        "file_id": "1RXysLypvs9YDGTU1T5O3qz-A0MJrGDQv",   # bar chart image
-        "wheel_file_id": "1NB2DHBTFlKyodeUzxsLm_n5PM8VWeuCs", # colour wheel image        
+        "file_id": "1DX36ehGdg36pCRvmMt8RFtpNaJp9Z3h_",   # bar chart image
+        "wheel_file_id": "1821e8EDcova8JS39ScgjWHTGcIOD6_EJ", # colour wheel image        
         "caption": "Figure 1 Split Complementary Colour Strategy"
     },
     "Analogous (3 colours)": {
         "definition": """**Analogous Colour Strategy (Three Colours)**  
 Uses three colours sitting side by side on the colour wheel. This creates a harmonious, natural appearance with smooth transitions (see Figure 2).""",
-        "file_id": "1kABcT7fSdOQ77S3YbMjUcLUNKxqQ9Cvi",
-         "wheel_file_id": "1VFqdudW9tr44I0nxrrDt2mlD5TreNKrP",
+        "file_id": "1RXysLypvs9YDGTU1T5O3qz-A0MJrGDQv",
+         "wheel_file_id": "1NB2DHBTFlKyodeUzxsLm_n5PM8VWeuCs",
         "caption": "Figure 2 Analogous Colour Strategy (Three Colours)"
     },
     "Analogous (2 colours, base colour is dominant)": {
         "definition": """**Analogous (2 Colours, Base Colour is Dominant)**  
 Uses two neighbouring colours on the wheel, with the base colour as the main focus and the adjacent colour serving as a secondary accent (see Figure 3).""",
-        "file_id": "1v40ReTUNP7VcGqsKRRJJyQ4Mj7U9l0rT",
-        "wheel_file_id": "1SiHSaSWj9cVbSefwiY13ar3RroCb6sLZ",
+        "file_id": "15bmGnz14rfQr3easGvdMYw-NqoH49WIH",
+        "wheel_file_id": "1hW1txjzQBJevfRZwNUdJaL4UvCpuy9eu",
         "caption": "Figure 3 Analogous (2 Colours, Base Colour is Dominant)"
     },
     "Analogous (2 colours, Analogous colour is dominant)": {
         "definition": """**Analogous (2 Colours, Analogous Colour is Dominant)**  
 Uses two neighbouring colours on the wheel, with the adjacent colour as the main focus and the base colour acting as a secondary accent (see Figure 4).""",
-        "file_id": "1A9876j8pMySQeOhkgT6tJueOGMuXLHGD",
-        "wheel_file_id": "16kF74Ig4FdVbsge3xFlGjm_XBm2l-TXC", # colour wheel image
+        "file_id": "15YY_GoVH5B5NDWbGxxis9jxawgbuTt4m",
+        "wheel_file_id": "1nwYdRcZGbUGj3Mc84qs1dAJFSV5N6AV6", # colour wheel image
         "caption": "Figure 4 Analogous (2 Colours, Analogous Colour is Dominant)"
     },
     "Complementary (base colour is dominant)": {
         "definition": """**Complementary (Base Colour is Dominant)**  
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents (see Figure 5).""",
-        "file_id": "1xB7AhWZKsAHgdNHllxuYzU1iS8VAJBaT",
-        "wheel_file_id": "15jf7h-9ugNTKFSuC__Bhj0a7goq1OlHw", # colour wheel image
+        "file_id": "1Gw306s2ho06D19dDEWXxD4vT0LPFtfga",
+        "wheel_file_id": "1C1zDvBHs0IaWNPe5vfQiBqMHVAIGNMer", # colour wheel image
         "caption": "Figure 5 Complementary (Base Colour is Dominant)"
     },
     "Complementary (complementary colour is dominant)": {
         "definition": """**Complementary (Complementary Colour is Dominant)**  
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The complementary colour serves as the main focus, covering most of the design, while the base colour is used in small amounts for accents (see Figure 6).""",
-        "file_id": "1dGtQSmx2f1jfMQZnDeejRX8aDiWVNCcn",
-        "wheel_file_id": "1n5_vfneBBB0DVRB3WnZTxx1hRH_6odUf", # colour wheel image
+        "file_id": "1xB7AhWZKsAHgdNHllxuYzU1iS8VAJBaT",
+        "wheel_file_id": "1ygogkS82ihinvasUYi-RP_1AbMSb1RMs", # colour wheel image
         "caption": "Figure 6 Complementary (Complementary Colour is Dominant)"
     },
     "Monochromatic (2 lighter shades)": {
         "definition": """**Monochromatic (2 Lighter Shades)**  
 A colour scheme that uses a single hue along with two lighter tints of that same colour (see Figure 7).""",
-        "file_id": "1HRP_LbFDB7M8F2EtLpV5zCt17IF9gxcr",
-         "wheel_file_id": "1SkN1pIPiEsNSLz7ynO-F8Gfuyk4EDaL_", # colour wheel image
+        "file_id": "1aleSAy2-SKhacIBfHn7CcIOCmB6Jayai",
+         "wheel_file_id": "11PoB6w-0bfpunDQc_bkO0tEAM88rkpGa", # colour wheel image
         "caption": "Figure 7 Monochromatic (2 Lighter Shades)"
     },
     "Monochromatic (1 lighter shade, base colour is dominant)": {
         "definition": """**Monochromatic (1 Lighter Shade, Base Colour is Dominant)**  
 A single hue complemented by a lighter tint, with the primary colour as the focal point and the lighter shade used sparingly (see Figure 8).""",
-        "file_id": "1u3vvu-DkRoS_ei8IJXf3yYBmZiTdjfR7",
-        "wheel_file_id": "1InFhYABbtQPtSAc1VMkkvuitSAGXwQQu", # colour wheel image
+        "file_id": "1_2xQtJPcSQGVVaPb8pwK97oSyhX5NXUZ",
+        "wheel_file_id": "1hBvAvvbqC103rlE05Jxi4WNZt18UZHWJ", # colour wheel image
         "caption": "Figure 8 Monochromatic (1 Lighter Shade, Base Colour is Dominant)"
     },
     "Monochromatic (1 lighter shade, lighter shade is dominant)": {
         "definition": """**Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)**  
 A single hue complemented by a lighter tint, with the lighter shade as the focal point and the primary colour used sparingly (see Figure 9).""",
-        "file_id": "1YDPePQz34N-fyCqdxeBzMNiuGJr2neFC",
-        "wheel_file_id": "1BSzicMqCyjJJJOF0OEVN9WvVaRobQC9o", # colour wheel image
+        "file_id": "1ZZMX-mjTvjtyZWhcgxiqKcnZmofxW9pz",
+        "wheel_file_id": "1l4hDds7xA4ORojIJNjWwdc58VEjU-U2f", # colour wheel image
         "caption": "Figure 9 Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)"
     },
     "No colour harmony strategies": {
         "definition": """**No Colour Harmony Strategies**  
 Use only a single colour without employing any colour harmony techniques (see Figure 10).""",
-        "file_id": "11evyJZ6gDzheZFyQoxGX90ImWT6FYHcU",
+        "file_id": "1ZZMX-mjTvjtyZWhcgxiqKcnZmofxW9pz",
         "caption": "Figure 10 No Colour Harmony Strategies"
     }
 }
