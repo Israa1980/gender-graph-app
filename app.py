@@ -62,8 +62,8 @@ strategy_definitions = {
         "definition": """**Split Complementary Colour Strategy**  
 A variation of complementary colours. You start with one base colour, then instead of using its direct opposite, 
 you use the two colours adjacent to that complementary colour without choosing the complementary colour itself (see Figure 1).""",
-        "file_id": "1DX36ehGdg36pCRvmMt8RFtpNaJp9Z3h_",   # bar chart image
-        "wheel_file_id": "1mi7PwxDZ_fRPwB7uUD3vyebkJW6ohzXP", # colour wheel image        
+        "file_id": "1RXysLypvs9YDGTU1T5O3qz-A0MJrGDQv",   # bar chart image
+        "wheel_file_id": "1NB2DHBTFlKyodeUzxsLm_n5PM8VWeuCs", # colour wheel image        
         "caption": "Figure 1 Split Complementary Colour Strategy"
     },
     "Analogous (3 colours)": {
