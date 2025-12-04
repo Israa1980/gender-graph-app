@@ -127,7 +127,7 @@ A single hue complemented by a lighter tint, with the lighter shade as the focal
     "No colour harmony strategies": {
         "definition": """**No Colour Harmony Strategies**  
 Use only a single colour without employing any colour harmony techniques (see Figure 10).""",
-        "file_id": "1ZZMX-mjTvjtyZWhcgxiqKcnZmofxW9pz",
+        "file_id": "142kIRmnKDKScjSfHx9LMC7yHvO5901cK",
         "caption": "Figure 10 No Colour Harmony Strategies"
     }
 }
