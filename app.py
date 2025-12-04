@@ -91,8 +91,8 @@ Uses two neighbouring colours on the wheel, with the adjacent colour as the main
         "definition": """**Complementary (Base Colour is Dominant)**  
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents (see Figure 5).""",
-        "file_id": "1Kw_IBLmNDzQXumk1eFlN0r7BAj_ZikMX",
-          "wheel_file_id": "1w7dBh0vpqeh-niIAr5dex3Ii_NMBa4XQ", # colour wheel image
+        "file_id": "1xB7AhWZKsAHgdNHllxuYzU1iS8VAJBaT",
+        "wheel_file_id": "15jf7h-9ugNTKFSuC__Bhj0a7goq1OlHw", # colour wheel image
         "caption": "Figure 5 Complementary (Base Colour is Dominant)"
     },
     "Complementary (complementary colour is dominant)": {
