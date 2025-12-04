@@ -227,15 +227,15 @@ CLASS_DESCRIPTIONS = {
 # --- Improvement strategy image mapping ---
 IMPROVEMENT_IMAGES = {
     "split_complementary": {
-        "file_id": "11xPmNavyXrtnX-2s5M82WQAaupyy9UvB",
+        "file_id": "1lKPwOxJee9NIpVNy4x8VJTBE62OWQrNr",
         "desc": "Split complementary colour harmony (three complementary colours)."
     },
     "analogous_three": {
-        "file_id": "1wKXUv_NJiMsulV0_-J1FYWCG9pq-lPHJ",
+        "file_id": "1X3rSxqESUeX9KF1RO9q8zcI4WfnfmE8Y",
         "desc": "Analogous strategy using three analogous colours."
     },
     "analogous_two_base": {
-        "file_id": "18t8PXkyWvPT9K-pBz5Yrp9vVKRFa1SuU",
+        "file_id": "1lw8i8Szki1HkuKfxoVNY1Mv4wpyNw89H",
         "desc": "Analogous strategy with two analogous colours where the base colour is dominant."
     }
 }
