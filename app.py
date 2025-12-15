@@ -83,7 +83,7 @@ Uses two neighbouring colours on the wheel, with the base colour as the main foc
     "Analogous (2 colours, Analogous colour is dominant)": {
         "definition": """**Analogous (2 Colours, Analogous Colour is Dominant)**  
 Uses two neighbouring colours on the wheel, with the adjacent colour as the main focus and the base colour acting as a secondary accent (see Figure 4).""",
-        "file_id": "15YY_GoVH5B5NDWbGxxis9jxawgbuTt4m",
+        "file_id": "1GWIyke0WQQcIHNXFFcPLfU6dzU5wmI89",
         "wheel_file_id": "1nwYdRcZGbUGj3Mc84qs1dAJFSV5N6AV6", # colour wheel image
         "caption": "Figure 4 Analogous (2 Colours, Analogous Colour is Dominant)"
     },
@@ -91,7 +91,7 @@ Uses two neighbouring colours on the wheel, with the adjacent colour as the main
         "definition": """**Complementary (Base Colour is Dominant)**  
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents (see Figure 5).""",
-        "file_id": "1Gw306s2ho06D19dDEWXxD4vT0LPFtfga",
+        "file_id": "1ZNY50ltt2wfP9GalDbsYM1NXp23hTG98",
         "wheel_file_id": "1C1zDvBHs0IaWNPe5vfQiBqMHVAIGNMer", # colour wheel image
         "caption": "Figure 5 Complementary (Base Colour is Dominant)"
     },
@@ -99,7 +99,7 @@ The base colour serves as the main focus, covering most of the design, while the
         "definition": """**Complementary (Complementary Colour is Dominant)**  
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The complementary colour serves as the main focus, covering most of the design, while the base colour is used in small amounts for accents (see Figure 6).""",
-        "file_id": "1xB7AhWZKsAHgdNHllxuYzU1iS8VAJBaT",
+        "file_id": "1KZ2lyZYyjTWeu_NrjcivTFPhrMpki2oV",
         "wheel_file_id": "1ygogkS82ihinvasUYi-RP_1AbMSb1RMs", # colour wheel image
         "caption": "Figure 6 Complementary (Complementary Colour is Dominant)"
     },
@@ -120,7 +120,7 @@ A single hue complemented by a lighter tint, with the primary colour as the foca
     "Monochromatic (1 lighter shade, lighter shade is dominant)": {
         "definition": """**Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)**  
 A single hue complemented by a lighter tint, with the lighter shade as the focal point and the primary colour used sparingly (see Figure 9).""",
-        "file_id": "1ZZMX-mjTvjtyZWhcgxiqKcnZmofxW9pz",
+        "file_id": "1cbjyhdAg9FkPyLFlCiJ9akezrS8qxwmE",
         "wheel_file_id": "1l4hDds7xA4ORojIJNjWwdc58VEjU-U2f", # colour wheel image
         "caption": "Figure 9 Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)"
     },
