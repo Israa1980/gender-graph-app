@@ -314,12 +314,11 @@ if st.button("See Verdict"):
     
 
 
-# Initialize session state for expander
 if "expander_open" not in st.session_state:
     st.session_state.expander_open = True
-# --- Evaluation Section Trigger ---
+
+# --- Evaluation Section Info ---
 with st.expander("Want to Know If a Model Really Works? Click Here"):
-    
     st.markdown(
         """
         ### What Does “Evaluation” Mean?
@@ -336,10 +335,11 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
 
         This matters because a model that performs well only on training data may not be trustworthy in practice.  
         By comparing results across both test sets, you can see if the model is truly **robust and reliable**.
-
-        Click below to **Test the Model’s Reliability** and view the full performance report.
         """
     )
+
+# --- Evaluation Section Trigger ---
+with st.expander("Click below to **Test the Model’s Reliability**"):
     if st.button("Test the Model’s Reliability"):
         st.caption("Get accuracy scores, confusion matrix, and detailed classification reports")        
         test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
@@ -357,7 +357,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         y_true_split = split_gen.classes
         acc_split = np.mean(y_true_split == y_pred_split)
 
-        # similar Data Set
+        # Similar Data Set
         separate_gen = test_datagen.flow_from_directory(
             "test_only_1",
             target_size=(IMG_SIZE, IMG_SIZE),
@@ -372,7 +372,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
 
         # Display Results
         st.subheader("Evaluation Results")
-        st. markdown(
+        st.markdown(
             f"""
             - **Test Set Accuracy:** {acc_split:.4f}  
             - **Similar Data Set Accuracy:** {acc_sep:.4f}  
@@ -381,7 +381,6 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
             If accuracy is much lower on a similar data set, it suggests the model may not generalise well.
             """
         )
-        
 
         # Confusion Matrices
         fig, axes = plt.subplots(1, 2, figsize=(14, 6))
@@ -400,6 +399,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         axes[1].set_ylabel("True")
         plt.tight_layout()
         st.pyplot(fig)
+
         st.markdown(
             """
             **How to read these heatmaps:**  
@@ -415,28 +415,32 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         # --- Classification Reports ---
         st.subheader("Classification Reports")
 
-        # Generate reports as dicts
-        report_split_dict = classification_report(y_true_split, y_pred_split, target_names=CLASS_NAMES, output_dict=True)
+        report_split_dict = classification_report(
+            y_true_split, y_pred_split, target_names=CLASS_NAMES, output_dict=True
+        )
+        report_sep_dict = classification_report(
+            y_true_sep, y_pred_sep, target_names=CLASS_NAMES, output_dict=True
+        )
 
-        report_sep_dict = classification_report(y_true_sep, y_pred_sep, target_names=CLASS_NAMES, output_dict=True)
-
-
-       # Convert to DataFrames
         df_split = pd.DataFrame(report_split_dict).transpose()
         df_sep = pd.DataFrame(report_sep_dict).transpose()
-        # Drop summary rows you don’t want
         rows_to_drop = ["accuracy", "macro avg", "weighted avg"]
         df_split = df_split.drop(rows_to_drop, errors="ignore")
         df_sep = df_sep.drop(rows_to_drop, errors="ignore")
 
-       # Display nicely in tables
         st.markdown("**Test Set Report**")
-        st.dataframe(df_split.style.format({"precision": "{:.2f}", "recall": "{:.2f}", "f1-score": "{:.2f}", "support": "{:.0f}"}))
+        st.dataframe(df_split.style.format({
+            "precision": "{:.2f}", "recall": "{:.2f}", 
+            "f1-score": "{:.2f}", "support": "{:.0f}"
+        }))
 
         st.markdown("**Similar Data Set Report**")
-        st.dataframe(df_sep.style.format({"precision": "{:.2f}", "recall": "{:.2f}", "f1-score": "{:.2f}", "support": "{:.0f}"}))
-       
-        st. markdown(
+        st.dataframe(df_sep.style.format({
+            "precision": "{:.2f}", "recall": "{:.2f}", 
+            "f1-score": "{:.2f}", "support": "{:.0f}"
+        }))
+
+        st.markdown(
             """
             **Why this matters:**  
             The tables show precision, recall, F1-score, and support for each class.  
@@ -444,19 +448,10 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
             - **Recall**: How often the class is correctly identified.  
             - **F1-score**: Balance between precision and recall.  
             - **Support**: Number of samples for each class.  
-       
-          - These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
-          - For instance, low recall for "inclusive for both genders" would imply that the model frequently fails to recognise charts that are inclusive for both genders.
 
+            These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
             """
         )
-
-
-
-
-
-
-
 
 
 
