@@ -338,142 +338,120 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         """
     )
 
-# --- Evaluation Section Trigger ---
-with st.expander("Click below to **Test the Model’s Reliability**"):
-    if st.button("Test the Model’s Reliability"):
-        st.caption("Get accuracy scores, confusion matrix, and detailed classification reports")        
-        test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+    # --- Nested Evaluation Section Trigger ---
+    with st.expander("Click below to **Test the Model’s Reliability**"):
+        if st.button("Test the Model’s Reliability"):
+            st.caption("Get accuracy scores, confusion matrix, and detailed classification reports")        
+            test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
-        # Test Set
-        split_gen = test_datagen.flow_from_directory(
-            "test_1_1",
-            target_size=(IMG_SIZE, IMG_SIZE),
-            batch_size=BATCH_SIZE,
-            class_mode="categorical",
-            shuffle=False
-        )
-        y_probs_split = model.predict(split_gen, verbose=0)
-        y_pred_split = np.argmax(y_probs_split, axis=1)
-        y_true_split = split_gen.classes
-        acc_split = np.mean(y_true_split == y_pred_split)
+            # Test Set
+            split_gen = test_datagen.flow_from_directory(
+                "test_1_1",
+                target_size=(IMG_SIZE, IMG_SIZE),
+                batch_size=BATCH_SIZE,
+                class_mode="categorical",
+                shuffle=False
+            )
+            y_probs_split = model.predict(split_gen, verbose=0)
+            y_pred_split = np.argmax(y_probs_split, axis=1)
+            y_true_split = split_gen.classes
+            acc_split = np.mean(y_true_split == y_pred_split)
 
-        # Similar Data Set
-        separate_gen = test_datagen.flow_from_directory(
-            "test_only_1",
-            target_size=(IMG_SIZE, IMG_SIZE),
-            batch_size=BATCH_SIZE,
-            class_mode="categorical",
-            shuffle=False
-        )
-        y_probs_sep = model.predict(separate_gen, verbose=0)
-        y_pred_sep = np.argmax(y_probs_sep, axis=1)
-        y_true_sep = separate_gen.classes
-        acc_sep = np.mean(y_true_sep == y_pred_sep)
+            # Similar Data Set
+            separate_gen = test_datagen.flow_from_directory(
+                "test_only_1",
+                target_size=(IMG_SIZE, IMG_SIZE),
+                batch_size=BATCH_SIZE,
+                class_mode="categorical",
+                shuffle=False
+            )
+            y_probs_sep = model.predict(separate_gen, verbose=0)
+            y_pred_sep = np.argmax(y_probs_sep, axis=1)
+            y_true_sep = separate_gen.classes
+            acc_sep = np.mean(y_true_sep == y_pred_sep)
 
-        # Display Results
-        st.subheader("Evaluation Results")
-        st.markdown(
-            f"""
-            - **Test Set Accuracy:** {acc_split:.4f}  
-            - **Similar Data Set Accuracy:** {acc_sep:.4f}  
+            # Display Results
+            st.subheader("Evaluation Results")
+            st.markdown(
+                f"""
+                - **Test Set Accuracy:** {acc_split:.4f}  
+                - **Similar Data Set Accuracy:** {acc_sep:.4f}  
 
-            Higher accuracy means the model is making more correct predictions. 
-            If accuracy is much lower on a similar data set, it suggests the model may not generalise well.
-            """
-        )
+                Higher accuracy means the model is making more correct predictions. 
+                If accuracy is much lower on a similar data set, it suggests the model may not generalise well.
+                """
+            )
 
-        # Confusion Matrices
-        fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-        cm_split = confusion_matrix(y_true_split, y_pred_split)
-        sns.heatmap(cm_split, annot=True, fmt="d", cmap="Blues",
-                    xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[0])
-        axes[0].set_title("Test Set")
-        axes[0].set_xlabel("Predicted")
-        axes[0].set_ylabel("True")
+            # Confusion Matrices
+            fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+            cm_split = confusion_matrix(y_true_split, y_pred_split)
+            sns.heatmap(cm_split, annot=True, fmt="d", cmap="Blues",
+                        xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[0])
+            axes[0].set_title("Test Set")
+            axes[0].set_xlabel("Predicted")
+            axes[0].set_ylabel("True")
 
-        cm_sep = confusion_matrix(y_true_sep, y_pred_sep)
-        sns.heatmap(cm_sep, annot=True, fmt="d", cmap="Greens",
-                    xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[1])
-        axes[1].set_title("Similar Data Set")
-        axes[1].set_xlabel("Predicted")
-        axes[1].set_ylabel("True")
-        plt.tight_layout()
-        st.pyplot(fig)
+            cm_sep = confusion_matrix(y_true_sep, y_pred_sep)
+            sns.heatmap(cm_sep, annot=True, fmt="d", cmap="Greens",
+                        xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[1])
+            axes[1].set_title("Similar Data Set")
+            axes[1].set_xlabel("Predicted")
+            axes[1].set_ylabel("True")
+            plt.tight_layout()
+            st.pyplot(fig)
 
-        st.markdown(
-            """
-            **How to read these heatmaps:**  
-            - Each row shows the *true class*.  
-            - Each column shows the *predicted class*.  
-            - Diagonal values are correct predictions.  
-            - Off-diagonal values show misclassifications.  
+            st.markdown(
+                """
+                **How to read these heatmaps:**  
+                - Each row shows the *true class*.  
+                - Each column shows the *predicted class*.  
+                - Diagonal values are correct predictions.  
+                - Off-diagonal values show misclassifications.  
 
-            This helps you see which classes the model confuses most often.
-            """
-        )
+                This helps you see which classes the model confuses most often.
+                """
+            )
 
-        # --- Classification Reports ---
-        st.subheader("Classification Reports")
+            # --- Classification Reports ---
+            st.subheader("Classification Reports")
 
-        report_split_dict = classification_report(
-            y_true_split, y_pred_split, target_names=CLASS_NAMES, output_dict=True
-        )
-        report_sep_dict = classification_report(
-            y_true_sep, y_pred_sep, target_names=CLASS_NAMES, output_dict=True
-        )
+            report_split_dict = classification_report(
+                y_true_split, y_pred_split, target_names=CLASS_NAMES, output_dict=True
+            )
+            report_sep_dict = classification_report(
+                y_true_sep, y_pred_sep, target_names=CLASS_NAMES, output_dict=True
+            )
 
-        df_split = pd.DataFrame(report_split_dict).transpose()
-        df_sep = pd.DataFrame(report_sep_dict).transpose()
-        rows_to_drop = ["accuracy", "macro avg", "weighted avg"]
-        df_split = df_split.drop(rows_to_drop, errors="ignore")
-        df_sep = df_sep.drop(rows_to_drop, errors="ignore")
+            df_split = pd.DataFrame(report_split_dict).transpose()
+            df_sep = pd.DataFrame(report_sep_dict).transpose()
+            rows_to_drop = ["accuracy", "macro avg", "weighted avg"]
+            df_split = df_split.drop(rows_to_drop, errors="ignore")
+            df_sep = df_sep.drop(rows_to_drop, errors="ignore")
 
-        st.markdown("**Test Set Report**")
-        st.dataframe(df_split.style.format({
-            "precision": "{:.2f}", "recall": "{:.2f}", 
-            "f1-score": "{:.2f}", "support": "{:.0f}"
-        }))
+            st.markdown("**Test Set Report**")
+            st.dataframe(df_split.style.format({
+                "precision": "{:.2f}", "recall": "{:.2f}", 
+                "f1-score": "{:.2f}", "support": "{:.0f}"
+            }))
 
-        st.markdown("**Similar Data Set Report**")
-        st.dataframe(df_sep.style.format({
-            "precision": "{:.2f}", "recall": "{:.2f}", 
-            "f1-score": "{:.2f}", "support": "{:.0f}"
-        }))
+            st.markdown("**Similar Data Set Report**")
+            st.dataframe(df_sep.style.format({
+                "precision": "{:.2f}", "recall": "{:.2f}", 
+                "f1-score": "{:.2f}", "support": "{:.0f}"
+            }))
 
-        st.markdown(
-            """
-            **Why this matters:**  
-            The tables show precision, recall, F1-score, and support for each class.  
-            - **Precision**: How often predictions for a class are correct.  
-            - **Recall**: How often the class is correctly identified.  
-            - **F1-score**: Balance between precision and recall.  
-            - **Support**: Number of samples for each class.  
+            st.markdown(
+                """
+                **Why this matters:**  
+                The tables show precision, recall, F1-score, and support for each class.  
+                - **Precision**: How often predictions for a class are correct.  
+                - **Recall**: How often the class is correctly identified.  
+                - **F1-score**: Balance between precision and recall.  
+                - **Support**: Number of samples for each class.  
 
-            These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
-            """
-        )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
+                """
+            )
 
 
  
