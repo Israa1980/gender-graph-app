@@ -257,48 +257,49 @@ if st.button("See Verdict"):
             st.markdown("---")
     else:
         st.warning("Please upload one or more images.")
-
 # ---------------------------------------------------
 # EVALUATION SECTION (ONE EXPANDER)
 # ---------------------------------------------------
 
 with st.expander("Want to Know If a Model Really Works? Click Here"):
-  st.markdown(
-    """
-    ### What Does “Evaluation” Mean?
-    Evaluation is like a reality check for the model.  
-    We test it using a **held‑out test set** — data that was not used during training — to measure how well the model has learned to generalise.
 
-    Why Test the Model’s Reliability?  
-    Evaluating the model on this unseen test set helps you understand three key aspects:  
-    **Accuracy** shows how often the model predicts correctly.  
-    **Generalisation** indicates whether the model performs well on data it has never seen before.  
-    **Error patterns** reveal which classes the model most often confuses.
+    st.markdown(
+        """
+        ### What Does “Evaluation” Mean?
+        Evaluation is like a reality check for the model.  
+        We test it using a **held‑out test set** — data that was not used during training — to measure how well the model has learned to generalise.
 
-    This matters because a model that performs well only on training data may not be trustworthy in practice.  
-    By examining performance on the test set, you can see whether the model is truly **robust and reliable**.
-    """
-)
+        Why Test the Model’s Reliability?  
+        Evaluating the model on this unseen test set helps you understand three key aspects:  
+        **Accuracy** shows how often the model predicts correctly.  
+        **Generalisation** indicates whether the model performs well on data it has never seen before.  
+        **Error patterns** reveal which classes the model most often confuses.
 
- test_gen = prepare_test_dataset()
+        This matters because a model that performs well only on training data may not be trustworthy in practice.  
+        By examining performance on the test set, you can see whether the model is truly **robust and reliable**.
+        """
+    )
 
- y_probs = model.predict(test_gen, verbose=0)
- y_pred = np.argmax(y_probs, axis=1)
- y_true = test_gen.classes
- acc = np.mean(y_true == y_pred)
+    # Load dataset (not cached)
+    test_gen = prepare_test_dataset()
 
-st.markdown(
-      f"""
-    - **Test Set Accuracy:** {acc:.4f}  
+    # Predictions
+    y_probs = model.predict(test_gen, verbose=0)
+    y_pred = np.argmax(y_probs, axis=1)
+    y_true = test_gen.classes
+    acc = np.mean(y_true == y_pred)
 
-    Higher accuracy means the model is making more correct predictions.  
-    Evaluating performance on this held‑out test set helps you understand how well the model generalises to unseen data.
-    """
-)
+    st.markdown(
+        f"""
+        - **Test Set Accuracy:** {acc:.4f}  
 
+        Higher accuracy means the model is making more correct predictions.  
+        Evaluating performance on this held‑out test set helps you understand how well the model generalises to unseen data.
+        """
+    )
 
     # Confusion Matrix
- cm = confusion_matrix(y_true, y_pred)
+    cm = confusion_matrix(y_true, y_pred)
     fig, ax = plt.subplots(figsize=(6, 5))
     sns.heatmap(
         cm,
@@ -312,16 +313,17 @@ st.markdown(
     st.pyplot(fig)
 
     st.markdown(
-            """
-            **How to read this heatmap:**  
-            - Each row shows the *true class*.  
-            - Each column shows the *predicted class*.  
-            - Diagonal values are correct predictions.  
-            - Off-diagonal values show misclassifications.  
+        """
+        **How to read this heatmap:**  
+        - Each row shows the *true class*.  
+        - Each column shows the *predicted class*.  
+        - Diagonal values are correct predictions.  
+        - Off-diagonal values show misclassifications.  
 
-            This helps you see which classes the model confuses most often.
-            """
-        )
+        This helps you see which classes the model confuses most often.
+        """
+    )
+
     # Classification Report
     st.subheader("Classification Report")
 
@@ -340,12 +342,26 @@ st.markdown(
             "support": "{:.0f}"
         })
     )
-    st.markdown("""
-    **Why this matters:**  
-    - **Precision**: How often predictions for a class are correct  
-    - **Recall**: How often the class is correctly identified  
-    - **F1-score**: Balance between precision and recall  
-    - **Support**: Number of samples per class 
-    These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class. 
-    """)
 
+    st.markdown(
+        """
+        **Why this matters:**  
+        - **Precision**: How often predictions for a class are correct  
+        - **Recall**: How often the class is correctly identified  
+        - **F1-score**: Balance between precision and recall  
+        - **Support**: Number of samples per class  
+
+        These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
+        """
+    )
+
+
+
+
+     
+
+    
+    
+ 
+          
+   
