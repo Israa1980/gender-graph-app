@@ -58,7 +58,6 @@ CLASS_NAMES = [
 # ---------------------------------------------------
 # CACHED FUNCTIONS
 # ---------------------------------------------------
-
 @st.cache_resource
 def load_model_cached():
     """Load the TensorFlow model once."""
@@ -70,6 +69,34 @@ def load_model_cached():
             quiet=False
         )
     return tf.keras.models.load_model('small_cnn_1_1.keras')
+
+
+@st.cache_data
+def ensure_test_dataset():
+    """Download and extract test dataset (safe to cache)."""
+    if not os.path.exists("test_1_1"):
+        split_zip_id = "1xklR2o42Xg5ZpAUenD5FE93mnjfY_4JP"
+        gdown.download(
+            f"https://drive.google.com/uc?id={split_zip_id}",
+            "test_1_1.zip",
+            quiet=False
+        )
+        with zipfile.ZipFile("test_1_1.zip", "r") as zip_ref:
+            zip_ref.extractall("test_1_1")
+    return "test_1_1"
+
+
+def prepare_test_dataset():
+    """Create DirectoryIterator (NOT cached — fixes crash)."""
+    ensure_test_dataset()
+    test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+    return test_datagen.flow_from_directory(
+        "test_1_1",
+        target_size=(IMG_SIZE, IMG_SIZE),
+        batch_size=BATCH_SIZE,
+        class_mode="categorical",
+        shuffle=False
+    )
 
 
 @st.cache_data
@@ -87,32 +114,8 @@ def download_and_cache_image(file_id, filename):
     return out_path
 
 
-@st.cache_data
-def prepare_test_dataset():
-    """Download and extract ONE test dataset."""
-    if not os.path.exists("test_1_1"):
-        split_zip_id = "1xklR2o42Xg5ZpAUenD5FE93mnjfY_4JP"
-        gdown.download(
-            f"https://drive.google.com/uc?id={split_zip_id}",
-            "test_1_1.zip",
-            quiet=False
-        )
-        with zipfile.ZipFile("test_1_1.zip", "r") as zip_ref:
-            zip_ref.extractall("test_1_1")
-
-    test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
-
-    return test_datagen.flow_from_directory(
-        "test_1_1",
-        target_size=(IMG_SIZE, IMG_SIZE),
-        batch_size=BATCH_SIZE,
-        class_mode="categorical",
-        shuffle=False
-    )
-
 # Load model once
 model = load_model_cached()
-
 # ---------------------------------------------------
 # COLOUR HARMONY STRATEGIES
 # ---------------------------------------------------
