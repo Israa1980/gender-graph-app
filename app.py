@@ -7,7 +7,9 @@ from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
 import tempfile
-# Show Streamlit version st.write("Streamlit version:", st.__version__)
+
+# Optional: show Streamlit version
+st.write("Streamlit version:", st.__version__)
 
 # ---------------------------------------------------
 # PAGE TITLE + OVERVIEW
@@ -75,10 +77,9 @@ def load_model_cached():
 
 @st.cache_data
 def download_and_cache_image(file_id, filename):
-    """Download image only once."""
+    """Download bar/wheel images only once."""
     os.makedirs("color_strategies", exist_ok=True)
     out_path = os.path.join("color_strategies", filename)
-
     if not os.path.exists(out_path):
         gdown.download(
             f"https://drive.google.com/uc?id={file_id}",
@@ -124,27 +125,30 @@ model = load_model_cached()
 
 st.subheader("Color Harmony Strategies")
 
-st.markdown("""
-Colour harmony strategies combine colours in ways that feel balanced and accessible.
-They help ensure that data visualisations are welcoming and easy to interpret for a wider audience.
-""")
-
-st.subheader("Color Harmony Strategies")
+st.markdown(
+    """
+    Colour harmony strategies are design approaches that combine colours in ways that feel balanced,
+    visually appealing, and accessible. In the context of inclusivity, these strategies help ensure
+    that data visualisations are welcoming and easy to interpret for a wider audience.
+    By applying harmonious colour schemes, we reduce bias, improve readability, and make charts
+    more engaging for everyone, regardless of gender or background. Here are some well-known colour harmony strategies.
+    """
+)
 
 strategy_definitions = {
     "Split Complementary (3 colours)": {
         "definition": """**Split Complementary Colour Strategy**  
 A variation of complementary colours. You start with one base colour, then instead of using its direct opposite, 
 you use the two colours adjacent to that complementary colour without choosing the complementary colour itself (see Figure 1).""",
-        "file_id": "1DX36ehGdg36pCRvmMt8RFtpNaJp9Z3h_",   # bar chart image
-        "wheel_file_id": "1821e8EDcova8JS39ScgjWHTGcIOD6_EJ", # colour wheel image        
+        "file_id": "1DX36ehGdg36pCRvmMt8RFtpNaJp9Z3h_",
+        "wheel_file_id": "1821e8EDcova8JS39ScgjWHTGcIOD6_EJ",
         "caption": "Figure 1 Split Complementary Colour Strategy"
     },
     "Analogous (3 colours)": {
         "definition": """**Analogous Colour Strategy (Three Colours)**  
 Uses three colours sitting side by side on the colour wheel. This creates a harmonious, natural appearance with smooth transitions (see Figure 2).""",
         "file_id": "1RXysLypvs9YDGTU1T5O3qz-A0MJrGDQv",
-         "wheel_file_id": "1NB2DHBTFlKyodeUzxsLm_n5PM8VWeuCs",
+        "wheel_file_id": "1NB2DHBTFlKyodeUzxsLm_n5PM8VWeuCs",
         "caption": "Figure 2 Analogous Colour Strategy (Three Colours)"
     },
     "Analogous (2 colours, base colour is dominant)": {
@@ -158,7 +162,7 @@ Uses two neighbouring colours on the wheel, with the base colour as the main foc
         "definition": """**Analogous (2 Colours, Analogous Colour is Dominant)**  
 Uses two neighbouring colours on the wheel, with the adjacent colour as the main focus and the base colour acting as a secondary accent (see Figure 4).""",
         "file_id": "1GWIyke0WQQcIHNXFFcPLfU6dzU5wmI89",
-        "wheel_file_id": "1nwYdRcZGbUGj3Mc84qs1dAJFSV5N6AV6", # colour wheel image
+        "wheel_file_id": "1nwYdRcZGbUGj3Mc84qs1dAJFSV5N6AV6",
         "caption": "Figure 4 Analogous (2 Colours, Analogous Colour is Dominant)"
     },
     "Complementary (base colour is dominant)": {
@@ -166,7 +170,7 @@ Uses two neighbouring colours on the wheel, with the adjacent colour as the main
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The base colour serves as the main focus, covering most of the design, while the complementary colour is used in small amounts for accents (see Figure 5).""",
         "file_id": "1ZNY50ltt2wfP9GalDbsYM1NXp23hTG98",
-        "wheel_file_id": "1C1zDvBHs0IaWNPe5vfQiBqMHVAIGNMer", # colour wheel image
+        "wheel_file_id": "1C1zDvBHs0IaWNPe5vfQiBqMHVAIGNMer",
         "caption": "Figure 5 Complementary (Base Colour is Dominant)"
     },
     "Complementary (complementary colour is dominant)": {
@@ -174,28 +178,28 @@ The base colour serves as the main focus, covering most of the design, while the
 Uses two colours that are opposite each other on the colour wheel (e.g., blue and orange). 
 The complementary colour serves as the main focus, covering most of the design, while the base colour is used in small amounts for accents (see Figure 6).""",
         "file_id": "1KZ2lyZYyjTWeu_NrjcivTFPhrMpki2oV",
-        "wheel_file_id": "1ygogkS82ihinvasUYi-RP_1AbMSb1RMs", # colour wheel image
+        "wheel_file_id": "1ygogkS82ihinvasUYi-RP_1AbMSb1RMs",
         "caption": "Figure 6 Complementary (Complementary Colour is Dominant)"
     },
     "Monochromatic (2 lighter shades)": {
         "definition": """**Monochromatic (2 Lighter Shades)**  
 A colour scheme that uses a single hue along with two lighter tints of that same colour (see Figure 7).""",
         "file_id": "1aleSAy2-SKhacIBfHn7CcIOCmB6Jayai",
-         "wheel_file_id": "11PoB6w-0bfpunDQc_bkO0tEAM88rkpGa", # colour wheel image
+        "wheel_file_id": "11PoB6w-0bfpunDQc_bkO0tEAM88rkpGa",
         "caption": "Figure 7 Monochromatic (2 Lighter Shades)"
     },
     "Monochromatic (1 lighter shade, base colour is dominant)": {
         "definition": """**Monochromatic (1 Lighter Shade, Base Colour is Dominant)**  
 A single hue complemented by a lighter tint, with the primary colour as the focal point and the lighter shade used sparingly (see Figure 8).""",
         "file_id": "1_2xQtJPcSQGVVaPb8pwK97oSyhX5NXUZ",
-        "wheel_file_id": "1hBvAvvbqC103rlE05Jxi4WNZt18UZHWJ", # colour wheel image
+        "wheel_file_id": "1hBvAvvbqC103rlE05Jxi4WNZt18UZHWJ",
         "caption": "Figure 8 Monochromatic (1 Lighter Shade, Base Colour is Dominant)"
     },
     "Monochromatic (1 lighter shade, lighter shade is dominant)": {
         "definition": """**Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)**  
 A single hue complemented by a lighter tint, with the lighter shade as the focal point and the primary colour used sparingly (see Figure 9).""",
         "file_id": "1cbjyhdAg9FkPyLFlCiJ9akezrS8qxwmE",
-        "wheel_file_id": "1l4hDds7xA4ORojIJNjWwdc58VEjU-U2f", # colour wheel image
+        "wheel_file_id": "1l4hDds7xA4ORojIJNjWwdc58VEjU-U2f",
         "caption": "Figure 9 Monochromatic (1 Lighter Shade, Lighter Shade is Dominant)"
     },
     "No colour harmony strategies": {
@@ -206,25 +210,79 @@ Use only a single colour without employing any colour harmony techniques (see Fi
     }
 }
 
-
 for title, info in strategy_definitions.items():
     chart_path = download_and_cache_image(info["file_id"], f"{title}_chart.jpg")
-
     wheel_path = None
     if "wheel_file_id" in info:
         wheel_path = download_and_cache_image(info["wheel_file_id"], f"{title}_wheel.jpg")
 
     st.markdown(info["definition"])
     col1, col2 = st.columns(2)
-
     with col1:
         st.image(chart_path, width=300, caption=info["caption"])
-
     with col2:
         if wheel_path:
             st.image(wheel_path, width=300)
-
     st.markdown("---")
+
+# ---------------------------------------------------
+# CLASS DESCRIPTIONS + IMPROVEMENT MAPPINGS
+# ---------------------------------------------------
+
+CLASS_DESCRIPTIONS = {
+    "inclusive for male": (
+        "Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques: "
+        "Complementary colour strategy (base colour dominant), complementary colour strategy (complementary colour dominant), "
+        "monochromatic strategy (base colour dominant), or analogous strategy (analogous colour dominant), "
+        "which our studies suggest these approaches are generally inclusive for male users.\n\n"
+        "**To improve inclusivity**, you could adopt strategies such as:\n"
+        "- Split complementary colour harmony (three complementary colours)\n"
+        "- Analogous strategy using three analogous colours\n"
+        "- Analogous strategy with two analogous colours where the base colour is dominant."
+    ),
+    "inclusive for both genders": (
+        "Well done! Your data visualisation is considered **inclusive for both genders** as it uses one of the following colour harmony techniques:\n"
+        "- Split complementary (three colours)\n"
+        "- Analogous (three colours)\n"
+        "- Analogous (two colours, base colour dominant), which our studies suggest is generally inclusive for both genders of users."
+    ),
+    "not inclusive for both genders": (
+        "Your visualisation is considered **not inclusive for both genders** as it uses one of the following colour harmony techniques: "
+        "no colour strategy (all bars one colour), monochromatic with two lighter shades, or monochromatic where the lighter shade is dominant. "
+        "Our studies suggest these approaches are not generally inclusive for both genders of users.\n\n"
+        "**To improve inclusivity**, you could adopt strategies such as:\n"
+        "- Split complementary colour harmony (three complementary colours)\n"
+        "- Analogous strategy using three analogous colours\n"
+        "- Analogous strategy with two analogous colours where the base colour is dominant."
+    )
+}
+
+IMPROVEMENT_IMAGES = {
+    "split_complementary": {
+        "file_id": "1lKPwOxJee9NIpVNy4x8VJTBE62OWQrNr",
+        "desc": "Split complementary colour harmony (three complementary colours)."
+    },
+    "analogous_three": {
+        "file_id": "1X3rSxqESUeX9KF1RO9q8zcI4WfnfmE8Y",
+        "desc": "Analogous strategy using three analogous colours."
+    },
+    "analogous_two_base": {
+        "file_id": "1lw8i8Szki1HkuKfxoVNY1Mv4wpyNw89H",
+        "desc": "Analogous strategy with two analogous colours where the base colour is dominant."
+    }
+}
+
+VERDICT_IMPROVEMENTS = {
+    "inclusive for male": ["split_complementary", "analogous_three", "analogous_two_base"],
+    "not inclusive for both genders": ["split_complementary", "analogous_three", "analogous_two_base"]
+}
+
+def download_image(file_id, target_dir=tempfile.gettempdir()):
+    out_path = os.path.join(target_dir, f"{file_id}.png")
+    if not os.path.exists(out_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, out_path, quiet=True)
+    return out_path
 
 # ---------------------------------------------------
 # PREDICTION SECTION
@@ -258,14 +316,12 @@ if st.button("See Verdict"):
             st.text(f"File: {uploaded_file.name}")
             st.text(f"Verdict: {class_name}")
 
-            # --- Confidence explanation ---
             confidence_msg = f"""
             **Confidence Score:** {confidence:.2f}  
             The confidence score indicates how certain the AI model is about the choice it has made.  
             This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
             For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
             """
-
             if confidence >= 0.75:
                 confidence_msg += "\nThe model demonstrates strong confidence in this result, making the verdict highly reliable."
             elif confidence >= 0.60:
@@ -275,11 +331,9 @@ if st.button("See Verdict"):
 
             st.markdown(confidence_msg)
 
-            # --- Explanation of the class verdict ---
             st.markdown(explanation)
             st.markdown("---")
 
-            # --- Show improvement examples if applicable ---
             if class_name in VERDICT_IMPROVEMENTS:
                 st.markdown("**Visual examples of suggested strategies:**")
                 for strategy_key in VERDICT_IMPROVEMENTS[class_name]:
@@ -295,7 +349,7 @@ if st.button("See Verdict"):
         st.warning("Please upload one or more images.")
 
 # ---------------------------------------------------
-# EVALUATION SECTION (ONE EXPANDER)
+# EVALUATION SECTION (ONE TEST SET ONLY)
 # ---------------------------------------------------
 
 with st.expander("Want to Know If a Model Really Works? Click Here"):
@@ -317,10 +371,8 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         """
     )
 
-    # Load dataset (not cached)
     test_gen = prepare_test_dataset()
 
-    # Predictions
     y_probs = model.predict(test_gen, verbose=0)
     y_pred = np.argmax(y_probs, axis=1)
     y_true = test_gen.classes
@@ -335,7 +387,6 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         """
     )
 
-    # Confusion Matrix
     cm = confusion_matrix(y_true, y_pred)
     fig, ax = plt.subplots(figsize=(6, 5))
     sns.heatmap(
@@ -361,7 +412,6 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         """
     )
 
-    # Classification Report
     st.subheader("Classification Report")
 
     report_dict = classification_report(
@@ -391,14 +441,3 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
         These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
         """
     )
-
-
-
-
-     
-
-    
-    
- 
-          
-   
