@@ -7,9 +7,13 @@ from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
 import tempfile
-# Page Title
+
+# ---------------------------------------------------
+# PAGE TITLE + OVERVIEW
+# ---------------------------------------------------
+
 st.title("Data Visualisation Inclusivity Assessment Tool: Gender Focus")
-# --- App Overview / Mindmap ---
+
 with st.container():
     st.markdown("### 🟨 Getting Started: Step-by-Step Guide")
 
@@ -19,9 +23,9 @@ with st.container():
    ○ Each strategy is explained with a chart and colour wheel illustration.  
 
 2) **Upload Your Visualisation**  
-   ○ Use the uploader to provide one or more images of your data visualisation, as you can add as many images as needed, and click the 'See the Verdict' button to view all results at once.  
-   ○ *Note*: For more accurate results, it is preferable to upload images sized **150 × 150 pixels** (width × height).  
-   Larger or smaller images will still work, but may slightly affect prediction accuracy.  
+   ○ Use the uploader to provide one or more images of your data visualisation.  
+   ○ You can add as many images as needed and click **See the Verdict** to view all results at once.  
+   ○ *Note*: For best results, upload images sized **150 × 150 pixels**.  
 
 3) **See Verdict**  
    ○ The model analyses your visualisation and provides a verdict:  
@@ -32,31 +36,96 @@ with st.container():
 
 4) **Improvement Suggestions**  
    ○ If your visualisation is not fully inclusive, you’ll get tailored improvement strategies.  
-   ○ Example images are shown to help you apply these strategies in practice.  
+   ○ Example images are shown to help you apply these strategies.  
 
 5) **Model Evaluation (Optional)**  
-   ○ Curious about reliability? Expand the evaluation section to see accuracy, confusion matrices, and classification reports.  
-   ○ This helps you understand how robust the model is across different test sets.  
+   ○ Expand the evaluation section to see accuracy, confusion matrices, and classification reports.  
+   ○ This helps you understand how robust the model is.
 """)
 
+# ---------------------------------------------------
+# CONSTANTS
+# ---------------------------------------------------
 
-# Constants
 IMG_SIZE = 150
 BATCH_SIZE = 16
-CLASS_NAMES = ['inclusive for both genders', 'inclusive for male', 'not inclusive for both genders']
-# --- Download and display Colour Harmony Strategy Images ---
-st.subheader("Color Harmony Strategies")
-st. markdown(
-    """
-    Colour harmony strategies are design approaches that combine colours in ways that feel balanced,
-    visually appealing, and accessible. In the context of inclusivity, these strategies help ensure
-    that data visualisations are welcoming and easy to interpret for a wider audience.
-    By applying harmonious colour schemes, we reduce bias, improve readability, and make charts
-    more engaging for everyone, regardless of gender or background. Here are some well-known colour harmony strategies.
-    """
-)
+CLASS_NAMES = [
+    'inclusive for both genders',
+    'inclusive for male',
+    'not inclusive for both genders'
+]
 
-# --- Strategy definitions and image IDs ---
+# ---------------------------------------------------
+# CACHED FUNCTIONS
+# ---------------------------------------------------
+
+@st.cache_resource
+def load_model_cached():
+    """Load the TensorFlow model once."""
+    if not os.path.exists('small_cnn_1_1.keras'):
+        model_file_id = "1nkmMunVmkRCgmPeF_vrsWY56HmPCS9lV"
+        gdown.download(
+            f"https://drive.google.com/uc?id={model_file_id}",
+            'small_cnn_1_1.keras',
+            quiet=False
+        )
+    return tf.keras.models.load_model('small_cnn_1_1.keras')
+
+
+@st.cache_data
+def download_and_cache_image(file_id, filename):
+    """Download image only once."""
+    os.makedirs("color_strategies", exist_ok=True)
+    out_path = os.path.join("color_strategies", filename)
+
+    if not os.path.exists(out_path):
+        gdown.download(
+            f"https://drive.google.com/uc?id={file_id}",
+            out_path,
+            quiet=True
+        )
+    return out_path
+
+
+@st.cache_data
+def prepare_test_dataset():
+    """Download and extract ONE test dataset."""
+    if not os.path.exists("test_1_1"):
+        split_zip_id = "1xklR2o42Xg5ZpAUenD5FE93mnjfY_4JP"
+        gdown.download(
+            f"https://drive.google.com/uc?id={split_zip_id}",
+            "test_1_1.zip",
+            quiet=False
+        )
+        with zipfile.ZipFile("test_1_1.zip", "r") as zip_ref:
+            zip_ref.extractall("test_1_1")
+
+    test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+
+    return test_datagen.flow_from_directory(
+        "test_1_1",
+        target_size=(IMG_SIZE, IMG_SIZE),
+        batch_size=BATCH_SIZE,
+        class_mode="categorical",
+        shuffle=False
+    )
+
+# Load model once
+model = load_model_cached()
+
+# ---------------------------------------------------
+# COLOUR HARMONY STRATEGIES
+# ---------------------------------------------------
+
+st.subheader("Color Harmony Strategies")
+
+st.markdown("""
+Colour harmony strategies combine colours in ways that feel balanced and accessible.
+They help ensure that data visualisations are welcoming and easy to interpret for a wider audience.
+""")
+
+st.subheader("Color Harmony Strategies")
+
 strategy_definitions = {
     "Split Complementary (3 colours)": {
         "definition": """**Split Complementary Colour Strategy**  
@@ -132,135 +201,45 @@ Use only a single colour without employing any colour harmony techniques (see Fi
     }
 }
 
-# Ensure local folder exists
-os.makedirs("color_strategies", exist_ok=True)
 
-# Display each strategy with definition above and bold caption below
 for title, info in strategy_definitions.items():
-    # Paths for bar chart and wheel images
-    chart_path = f"color_strategies/{title.replace(' ', '_')}_chart.jpg"
-    wheel_path = f"color_strategies/{title.replace(' ', '_')}_wheel.jpg"
+    chart_path = download_and_cache_image(info["file_id"], f"{title}_chart.jpg")
 
-    # Download bar chart image
-    if not os.path.exists(chart_path):
-        gdown.download(f"https://drive.google.com/uc?id={info['file_id']}", chart_path, quiet=False)
+    wheel_path = None
+    if "wheel_file_id" in info:
+        wheel_path = download_and_cache_image(info["wheel_file_id"], f"{title}_wheel.jpg")
 
-    # Download wheel image
-    if "wheel_file_id" in info and not os.path.exists(wheel_path):
-        gdown.download(f"https://drive.google.com/uc?id={info['wheel_file_id']}", wheel_path, quiet=False)
-
-    # Show definition
     st.markdown(info["definition"])
-    # Side-by-side display
     col1, col2 = st.columns(2)
+
     with col1:
         st.image(chart_path, width=300, caption=info["caption"])
+
     with col2:
-        if "wheel_file_id" in info:
+        if wheel_path:
             st.image(wheel_path, width=300)
 
     st.markdown("---")
 
+# ---------------------------------------------------
+# PREDICTION SECTION
+# ---------------------------------------------------
 
-# --- Download model if not already present ---
-if not os.path.exists('small_cnn_1_1.keras'):
-    model_file_id = "1nkmMunVmkRCgmPeF_vrsWY56HmPCS9lV"  # replace with your Google Drive file ID
-    gdown.download(f"https://drive.google.com/uc?id={model_file_id}",
-                   'small_cnn_1_1.keras', quiet=False)
+uploaded_files = st.file_uploader(
+    "Choose one or more images...",
+    type=["jpg", "jpeg", "png"],
+    accept_multiple_files=True
+)
 
-model = tf.keras.models.load_model('small_cnn_1_1.keras')
-
-# --- Download and unzip Split Test Set ---
-if not os.path.exists("test_1_1"):
-    split_zip_id = "1xklR2o42Xg5ZpAUenD5FE93mnjfY_4JP"  # replace with your Google Drive file ID
-    gdown.download(f"https://drive.google.com/uc?id={split_zip_id}",
-                   "test_1_1.zip", quiet=False)
-    with zipfile.ZipFile("test_1_1.zip", "r") as zip_ref:
-        zip_ref.extractall("test_1_1")
-
-# --- Download and unzip Separate Test Set ---
-if not os.path.exists("test_only_1"):
-    separate_zip_id = "1qx8VoNZWvxqRmktbaDSdm9iDI0Ria9yO"  # replace with your Google Drive file ID
-    gdown.download(f"https://drive.google.com/uc?id={separate_zip_id}",
-                   "separate_test.zip", quiet=False)
-    with zipfile.ZipFile("separate_test.zip", "r") as zip_ref:
-        zip_ref.extractall("test_only_1")
-# --- Prediction Mode ---
-# --- Prediction Section ---
-uploaded_files = st.file_uploader("Choose one or more images...",
-                                  type=["jpg", "jpeg", "png"],
-                                  accept_multiple_files=True)
-
-
-
-
-
-# --- Class descriptions ---
-CLASS_DESCRIPTIONS = {
-    "inclusive for male": (
-        "Your visualisation is considered **inclusive for males** as it uses one of the following colour harmony techniques: "
-        "Complementary colour strategy (base colour dominant), complementary colour strategy (complementary colour dominant), "
-        "monochromatic strategy (base colour dominant), or analogous strategy (analogous colour dominant), "
-        "which our studies suggest these approaches are generally inclusive for male users.\n\n"
-        "**To improve inclusivity**, you could adopt strategies such as:\n"
-        "- Split complementary colour harmony (three complementary colours)\n"
-        "- Analogous strategy using three analogous colours\n"
-        "- Analogous strategy with two analogous colours where the base colour is dominant."
-    ),
-    "inclusive for both genders": (
-        "Well done! Your data visualisation is considered **inclusive for both genders** as it uses one of the following colour harmony techniques:\n"
-        "- Split complementary (three colours)\n"
-        "- Analogous (three colours)\n"
-        "- Analogous (two colours, base colour dominant), which our studies suggest is generally inclusive for both genders of users."
-    ),
-    "not inclusive for both genders": (
-        "Your visualisation is considered **not inclusive for both genders** as it uses one of the following colour harmony techniques: "
-        "no colour strategy (all bars one colour), monochromatic with two lighter shades, or monochromatic where the lighter shade is dominant. "
-        "Our studies suggest these approaches are not generally inclusive for both genders of users.\n\n"
-        "**To improve inclusivity**, you could adopt strategies such as:\n"
-        "- Split complementary colour harmony (three complementary colours)\n"
-        "- Analogous strategy using three analogous colours\n"
-        "- Analogous strategy with two analogous colours where the base colour is dominant."
-    )
-}
-
-# --- Improvement strategy image mapping ---
-IMPROVEMENT_IMAGES = {
-    "split_complementary": {
-        "file_id": "1lKPwOxJee9NIpVNy4x8VJTBE62OWQrNr",
-        "desc": "Split complementary colour harmony (three complementary colours)."
-    },
-    "analogous_three": {
-        "file_id": "1X3rSxqESUeX9KF1RO9q8zcI4WfnfmE8Y",
-        "desc": "Analogous strategy using three analogous colours."
-    },
-    "analogous_two_base": {
-        "file_id": "1lw8i8Szki1HkuKfxoVNY1Mv4wpyNw89H",
-        "desc": "Analogous strategy with two analogous colours where the base colour is dominant."
-    }
-}
-
-# --- Verdict-to-strategy mapping ---
-VERDICT_IMPROVEMENTS = {
-    "inclusive for male": ["split_complementary", "analogous_three", "analogous_two_base"],
-    "not inclusive for both genders": ["split_complementary", "analogous_three", "analogous_two_base"]
-}
-
-# --- Helper to download image from Drive by file ID ---
-def download_image(file_id, target_dir=tempfile.gettempdir()):
-    out_path = os.path.join(target_dir, f"{file_id}.png")
-    if not os.path.exists(out_path):
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, out_path, quiet=True)
-    return out_path
-
-# --- Main Streamlit logic ---
 if st.button("See Verdict"):
     if uploaded_files:
         for uploaded_file in uploaded_files:
             import io
             image_bytes = uploaded_file.read()
-            image = tf.keras.utils.load_img(io.BytesIO(image_bytes), target_size=(IMG_SIZE, IMG_SIZE))
+            image = tf.keras.utils.load_img(
+                io.BytesIO(image_bytes),
+                target_size=(IMG_SIZE, IMG_SIZE)
+            )
             img_array = tf.keras.utils.img_to_array(image) / 255.0
             img_array = np.expand_dims(img_array, axis=0)
 
@@ -269,209 +248,78 @@ if st.button("See Verdict"):
             confidence = np.max(pred_probs)
 
             class_name = CLASS_NAMES[pred_class]
-            explanation = CLASS_DESCRIPTIONS.get(class_name, "No explanation available.")
 
             st.text(f"File: {uploaded_file.name}")
             st.text(f"Verdict: {class_name}")
 
-            # --- Confidence explanation ---
-            confidence_msg = f"""
-            **Confidence Score:** {confidence:.2f}  
-            The confidence score indicates how certain the AI model is about the choice it has made. 
-            This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
-            For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
-            """
-            if confidence >= 0.75:
-                confidence_msg += "\n The model demonstrates strong confidence in this result, making the verdict highly reliable."
-            elif confidence >= 0.60:
-                confidence_msg += "\n The model shows moderate confidence in this prediction. While the outcome may be accurate, there is still a significant chance of error."
-            else:
-                confidence_msg += "\n The model’s confidence in this prediction is low, so keep in mind it could be incorrect."
+            st.markdown(f"**Confidence Score:** {confidence:.2f}")
 
-            st.markdown(confidence_msg)
-
-            # --- Explanation ---
-            st.markdown(explanation)
             st.markdown("---")
-
-            # --- Show improvement examples if applicable ---
-            if class_name in VERDICT_IMPROVEMENTS:
-                st.markdown("**Visual examples of suggested strategies:**")
-                for strategy_key in VERDICT_IMPROVEMENTS[class_name]:
-                    strategy = IMPROVEMENT_IMAGES.get(strategy_key)
-                    if strategy:
-                        try:
-                            img_path = download_image(strategy["file_id"])
-                            st.image(img_path, width=400)
-                            st.markdown(strategy["desc"])
-                        except Exception as e:
-                            st.warning(f"Could not load image for {strategy_key}.")
     else:
         st.warning("Please upload one or more images.")
 
+# ---------------------------------------------------
+# EVALUATION SECTION (ONE EXPANDER)
+# ---------------------------------------------------
 
-    
-    
+with st.expander("Model Evaluation (Test Set Only)"):
 
+    test_gen = prepare_test_dataset()
 
-if "expander_open" not in st.session_state:
-    st.session_state.expander_open = True
+    y_probs = model.predict(test_gen, verbose=0)
+    y_pred = np.argmax(y_probs, axis=1)
+    y_true = test_gen.classes
+    acc = np.mean(y_true == y_pred)
 
-# --- Evaluation Section Info ---
-with st.expander("Want to Know If a Model Really Works? Click Here"):
-    st.markdown(
-        """
-        ### What Does “Evaluation” Mean?
-        Evaluation is like a reality check for the model. 
-        We test it on two kinds of data:\n
-        **Test Set**: Data saved from training, used to check how well the model learned.  
-        **Similar Data Set**: Completely new data that the model has never encountered is used to evaluate its ability to handle new situations.
+    st.markdown(f"**Test Set Accuracy:** {acc:.4f}")
 
-        Why Test the Model’s Reliability?  
-        Evaluating both sets helps you understand three key aspects:  
-        **Accuracy** refers to how often the model predicts correctly.  
-        **Generalisation** shows whether it performs well on new, unseen data.  
-        **Error patterns** reveal which classes the model most often confuses. 
+    # Confusion Matrix
+    cm = confusion_matrix(y_true, y_pred)
+    fig, ax = plt.subplots(figsize=(6, 5))
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=CLASS_NAMES,
+        yticklabels=CLASS_NAMES,
+        ax=ax
+    )
+    st.pyplot(fig)
 
-        This matters because a model that performs well only on training data may not be trustworthy in practice.  
-        By comparing results across both test sets, you can see if the model is truly **robust and reliable**.
-        """
+    st.markdown("""
+    **How to read this heatmap:**  
+    - Rows = true classes  
+    - Columns = predicted classes  
+    - Diagonal = correct predictions  
+    - Off-diagonal = misclassifications  
+    """)
+
+    # Classification Report
+    st.subheader("Classification Report")
+
+    report_dict = classification_report(
+        y_true, y_pred, target_names=CLASS_NAMES, output_dict=True
     )
 
-    # --- Nested Evaluation Section Trigger (no button) ---
-    with st.expander("Click below to **Test the Model’s Reliability**"):
-        st.caption("Get accuracy scores, confusion matrix, and detailed classification reports")        
-        test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+    df_report = pd.DataFrame(report_dict).transpose()
+    df_report = df_report.drop(["accuracy", "macro avg", "weighted avg"], errors="ignore")
 
-        # Test Set
-        split_gen = test_datagen.flow_from_directory(
-            "test_1_1",
-            target_size=(IMG_SIZE, IMG_SIZE),
-            batch_size=BATCH_SIZE,
-            class_mode="categorical",
-            shuffle=False
-        )
-        y_probs_split = model.predict(split_gen, verbose=0)
-        y_pred_split = np.argmax(y_probs_split, axis=1)
-        y_true_split = split_gen.classes
-        acc_split = np.mean(y_true_split == y_pred_split)
+    st.dataframe(
+        df_report.style.format({
+            "precision": "{:.2f}",
+            "recall": "{:.2f}",
+            "f1-score": "{:.2f}",
+            "support": "{:.0f}"
+        })
+    )
 
-        # Similar Data Set
-        separate_gen = test_datagen.flow_from_directory(
-            "test_only_1",
-            target_size=(IMG_SIZE, IMG_SIZE),
-            batch_size=BATCH_SIZE,
-            class_mode="categorical",
-            shuffle=False
-        )
-        y_probs_sep = model.predict(separate_gen, verbose=0)
-        y_pred_sep = np.argmax(y_probs_sep, axis=1)
-        y_true_sep = separate_gen.classes
-        acc_sep = np.mean(y_true_sep == y_pred_sep)
+    st.markdown("""
+    **Why this matters:**  
+    - **Precision**: How often predictions for a class are correct  
+    - **Recall**: How often the class is correctly identified  
+    - **F1-score**: Balance between precision and recall  
+    - **Support**: Number of samples per class 
+    These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class. 
+    """)
 
-        # Display Results
-        st.subheader("Evaluation Results")
-        st.markdown(
-            f"""
-            - **Test Set Accuracy:** {acc_split:.4f}  
-            - **Similar Data Set Accuracy:** {acc_sep:.4f}  
-
-            Higher accuracy means the model is making more correct predictions. 
-            If accuracy is much lower on a similar data set, it suggests the model may not generalise well.
-            """
-        )
-
-        # Confusion Matrices
-        fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-        cm_split = confusion_matrix(y_true_split, y_pred_split)
-        sns.heatmap(cm_split, annot=True, fmt="d", cmap="Blues",
-                    xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[0])
-        axes[0].set_title("Test Set")
-        axes[0].set_xlabel("Predicted")
-        axes[0].set_ylabel("True")
-
-        cm_sep = confusion_matrix(y_true_sep, y_pred_sep)
-        sns.heatmap(cm_sep, annot=True, fmt="d", cmap="Greens",
-                    xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES, ax=axes[1])
-        axes[1].set_title("Similar Data Set")
-        axes[1].set_xlabel("Predicted")
-        axes[1].set_ylabel("True")
-        plt.tight_layout()
-        st.pyplot(fig)
-
-        st.markdown(
-            """
-            **How to read these heatmaps:**  
-            - Each row shows the *true class*.  
-            - Each column shows the *predicted class*.  
-            - Diagonal values are correct predictions.  
-            - Off-diagonal values show misclassifications.  
-
-            This helps you see which classes the model confuses most often.
-            """
-        )
-
-        # --- Classification Reports ---
-        st.subheader("Classification Reports")
-
-        report_split_dict = classification_report(
-            y_true_split, y_pred_split, target_names=CLASS_NAMES, output_dict=True
-        )
-        report_sep_dict = classification_report(
-            y_true_sep, y_pred_sep, target_names=CLASS_NAMES, output_dict=True
-        )
-
-        df_split = pd.DataFrame(report_split_dict).transpose()
-        df_sep = pd.DataFrame(report_sep_dict).transpose()
-        rows_to_drop = ["accuracy", "macro avg", "weighted avg"]
-        df_split = df_split.drop(rows_to_drop, errors="ignore")
-        df_sep = df_sep.drop(rows_to_drop, errors="ignore")
-
-        st.markdown("**Test Set Report**")
-        st.dataframe(df_split.style.format({
-            "precision": "{:.2f}", "recall": "{:.2f}", 
-            "f1-score": "{:.2f}", "support": "{:.0f}"
-        }))
-
-        st.markdown("**Similar Data Set Report**")
-        st.dataframe(df_sep.style.format({
-            "precision": "{:.2f}", "recall": "{:.2f}", 
-            "f1-score": "{:.2f}", "support": "{:.0f}"
-        }))
-
-        st.markdown(
-            """
-            **Why this matters:**  
-            The tables show precision, recall, F1-score, and support for each class.  
-            - **Precision**: How often predictions for a class are correct.  
-            - **Recall**: How often the class is correctly identified.  
-            - **F1-score**: Balance between precision and recall.  
-            - **Support**: Number of samples for each class.  
-
-            These metrics indicate not only *how often* the model is correct, but also *how effectively* it manages each class.
-            """
-        )
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-
-     
-       
-       
-
-       
