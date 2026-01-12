@@ -7,6 +7,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
 import tempfile
+# Show Streamlit version st.write("Streamlit version:", st.__version__)
 
 # ---------------------------------------------------
 # PAGE TITLE + OVERVIEW
@@ -252,15 +253,47 @@ if st.button("See Verdict"):
             confidence = np.max(pred_probs)
 
             class_name = CLASS_NAMES[pred_class]
+            explanation = CLASS_DESCRIPTIONS.get(class_name, "No explanation available.")
 
             st.text(f"File: {uploaded_file.name}")
             st.text(f"Verdict: {class_name}")
 
-            st.markdown(f"**Confidence Score:** {confidence:.2f}")
+            # --- Confidence explanation ---
+            confidence_msg = f"""
+            **Confidence Score:** {confidence:.2f}  
+            The confidence score indicates how certain the AI model is about the choice it has made.  
+            This score ranges from 0 to 1, with values closer to 1 indicating that the model is more confident in its decision.  
+            For instance, a score of **{confidence:.2f}** means the model is {confidence*100:.0f}% sure that the visualisation it selected **is {class_name}**.
+            """
 
+            if confidence >= 0.75:
+                confidence_msg += "\nThe model demonstrates strong confidence in this result, making the verdict highly reliable."
+            elif confidence >= 0.60:
+                confidence_msg += "\nThe model shows moderate confidence in this prediction. While the outcome may be accurate, there is still a significant chance of error."
+            else:
+                confidence_msg += "\nThe model’s confidence in this prediction is low, so keep in mind it could be incorrect."
+
+            st.markdown(confidence_msg)
+
+            # --- Explanation of the class verdict ---
+            st.markdown(explanation)
             st.markdown("---")
+
+            # --- Show improvement examples if applicable ---
+            if class_name in VERDICT_IMPROVEMENTS:
+                st.markdown("**Visual examples of suggested strategies:**")
+                for strategy_key in VERDICT_IMPROVEMENTS[class_name]:
+                    strategy = IMPROVEMENT_IMAGES.get(strategy_key)
+                    if strategy:
+                        try:
+                            img_path = download_image(strategy["file_id"])
+                            st.image(img_path, width=400)
+                            st.markdown(strategy["desc"])
+                        except Exception:
+                            st.warning(f"Could not load image for {strategy_key}.")
     else:
         st.warning("Please upload one or more images.")
+
 # ---------------------------------------------------
 # EVALUATION SECTION (ONE EXPANDER)
 # ---------------------------------------------------
