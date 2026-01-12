@@ -280,15 +280,15 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
     """
 )
 
-    test_gen = prepare_test_dataset()
+ test_gen = prepare_test_dataset()
 
-    y_probs = model.predict(test_gen, verbose=0)
-    y_pred = np.argmax(y_probs, axis=1)
-    y_true = test_gen.classes
-    acc = np.mean(y_true == y_pred)
+ y_probs = model.predict(test_gen, verbose=0)
+ y_pred = np.argmax(y_probs, axis=1)
+ y_true = test_gen.classes
+ acc = np.mean(y_true == y_pred)
 
-    st.markdown(
-    f"""
+st.markdown(
+      f"""
     - **Test Set Accuracy:** {acc:.4f}  
 
     Higher accuracy means the model is making more correct predictions.  
@@ -298,7 +298,7 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
 
 
     # Confusion Matrix
-    cm = confusion_matrix(y_true, y_pred)
+ cm = confusion_matrix(y_true, y_pred)
     fig, ax = plt.subplots(figsize=(6, 5))
     sns.heatmap(
         cm,
@@ -340,7 +340,6 @@ with st.expander("Want to Know If a Model Really Works? Click Here"):
             "support": "{:.0f}"
         })
     )
-
     st.markdown("""
     **Why this matters:**  
     - **Precision**: How often predictions for a class are correct  
